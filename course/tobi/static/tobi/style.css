@@ -1,0 +1,32 @@
+/*
+ * CSS Tobi web site 
+ * Author : Thomas Boutry <thomas.boutry@x3rus.com>
+ * Description :
+ *  Create look for the web site , 
+ *
+ * Ref Color are orignaly inspired by :a
+ * http://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project
+ *
+ * Color use : 
+ *  dark red (bourgogne) : D93240
+ *  dark blue grey : 638CA6
+ *  light blue grey  :  BFD4D9
+ *  dark green bleu (turquoise fonce): 0F5959
+ *  light green blue (turquoise claire) : 17A697
+ *
+ */
+
+
+body {
+    background-color: #BFD4D9;
+}
+
+
+#main {
+    width: 700px;
+    margin: 100px 0px 60px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
