@@ -21,14 +21,27 @@ body {
     background-color: #BFD4D9;
 }
 
+/*
+ * DIV content
+ */
 
 #main {
-    width: 700px;
+    width: 100%;
     margin: 100px 0px 60px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-}
+} /* FIN main */
+
+.main_central{
+    position: relative ;
+    width: 50%;
+    margin: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+} /* FIN main_central */
 
 /* 
  * HEADER 
@@ -40,9 +53,9 @@ body {
     margin: auto -7px 10px; /* TODO : fix super moche, faut comprendre pourquoi j'ai le decalage a gauche */
     width: 100%;
     -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
-    height:70px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height:50px;
     display: table;
     border-color: #0F5959;
     border-style: solid;
@@ -50,8 +63,8 @@ body {
 
 .header_left, .header_right {
     vertical-align: middle;
-    min-height: 50em;
-    height:50px;        
+    min-height: 30em;
+    height:30px;        
     display: table-cell;
     background-color:#638CA6;
     color: white;
@@ -69,20 +82,20 @@ body {
 
 .header_left ul li 
 {
-        margin: 5px;
-        display: inline-block;  /* TODO voir la difference entre inline et inline-block */
-        vertical-align: middle; /* | top | bottom */
-        font-size: 20px;
+    margin: 5px;
+    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
+    vertical-align: middle; /* | top | bottom */
+    font-size: 20px;
 }
 
 .header_right ul li 
 {
- /*       display:inline; */
-        horizontal-align: right; /* TODO aligner a droite */
-        margin: 5px;
-        display: inline-block;  /* TODO voir la difference entre inline et inline-block */
-        vertical-align: middle; /* | top | bottom */
-        font-size: 20px;
+    /*       display:inline; */
+    horizontal-align: right; /* TODO aligner a droite */
+    margin: 5px;
+    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
+    vertical-align: middle; /* | top | bottom */
+    font-size: 20px;
 }
 
 
