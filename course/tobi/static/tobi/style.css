@@ -50,7 +50,7 @@ body {
 #header{
     position: fixed;
     top: 0; 
-    margin: auto -7px 10px; /* TODO : fix super moche, faut comprendre pourquoi j'ai le decalage a gauche */
+    margin: auto -7px 0px; /* TODO : fix super moche, faut comprendre pourquoi j'ai le decalage a gauche */
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -75,10 +75,25 @@ body {
 
 }
 
+/* TODO  : voir s'il est possible de merger les configurations de header_left et header_right */
 
 .header_left li a {
     color: white;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
 }
+
+.header_left ul
+{
+    margin: 0px 0px 0px; 
+}
+
+.header_right ul
+{
+    margin: 0px 0px 0px; 
+}
+
 
 .header_left ul li 
 {
@@ -86,6 +101,9 @@ body {
     display: inline-block;  /* TODO voir la difference entre inline et inline-block */
     vertical-align: middle; /* | top | bottom */
     font-size: 20px;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px;
 }
 
 .header_right ul li 
@@ -96,10 +114,16 @@ body {
     display: inline-block;  /* TODO voir la difference entre inline et inline-block */
     vertical-align: middle; /* | top | bottom */
     font-size: 20px;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
 }
 
 
 .header_right li a {
     color: white;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
 }
 
