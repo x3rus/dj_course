@@ -1,9 +1,7 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>   
-    </head>
-    <body>
+{% extends "tobi/base.html" %}
+
+
+{% block content %}
         <!-- List of uploaded documents -->
         {% if documents %}
         <ul>
@@ -26,6 +24,4 @@
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>
-    </body>
-</html> 
-
+{% endblock %}
