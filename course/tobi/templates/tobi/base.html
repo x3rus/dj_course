@@ -5,6 +5,8 @@
     -->
     <head>
         {% load staticfiles %}
+        <script src="{% static 'tobi/scripts/jquery.min.js' %}"></script>
+        <script src="{% static 'tobi/scripts/main.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'tobi/style.css' %}" />
         <title>{% block title %} Tobi Running{% endblock %}</title>
         {% block script %} {% endblock %}
@@ -16,7 +18,7 @@
     <div id="header">
             <div class="header_left">
                 <ul>
-                    <li> <a href="/tobi/"> <img src="{% static 'tobi/images/Athletics_pictogram.png' %}" alt="Logo small" style="float;width:70px;height:70px;" > </a></li> 
+                    <li> <img src="{% static 'tobi/images/Neoclassical_Velocity.JPG' %}" alt="Logo small" style="float;width:50px;height:35px;" > </li>
                     <li> <a href="/tobi/">home page </a></li> 
                 </ul>
             </div> <!--Fin header_left -->
@@ -24,13 +26,9 @@
                 <ul>
                     <!-- TODO : modifier pour que l'affichage soit login quand l'utilisateur est anonymous
                         ou logout quand l'utilisateur est deja authentifier -->
-                     {% if user.is_authenticated %}
-                    <li> <a href="/tobi/logout"> {{user.username}}/ logout </a></li> 
-                    {% else %}
-                    <li> <a href="/tobi/login"> login here !</a></li> 
-                    {% endif %}
+                    <li> <a href="/tobi/login">login / logout </a></li> 
                 </ul>
-            </div> <!--Fin header_right-->
+            </div><!--Fin header_right-->
         </div> <!-- Fin header -->
 
 

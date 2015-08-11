@@ -1,0 +1,32 @@
+{% extends "tobi/base.html" %}
+
+
+{% block content %}
+        <!-- List of uploaded activitys -->
+        {% if activitys %}
+        <ul>
+            {% for document in activitys %}
+            <li><a href="{{ document.filename.url }}">{{ document.filename.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No activitys.</p>
+        {% endif %}
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'tobi:new_perf' %}" method="post" enctype="multipart/form-data" id="post-activity">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.gpxfile.label_tag }} {{ form.gpxfile.help_text }}</p>
+            <p>
+            {{ form.gpxfile.errors }}
+            {{ form.gpxfile }}
+            </p>
+            <p><input type="submit" value="Upload" /></p>
+            <p> {{form.title.label}}  {{form.title }}</p>
+            <p> {{form.datePerformed.label}}  {{form.datePerformed}}</p>
+            <p> {{form.dateUploaded.label}}  {{form.dateUploaded}}</p>
+            <p> {{form.description.label}}  {{form.description}}</p>
+            <p> {{form.ispublic.label}}  {{form.ispublic}}</p>
+        </form>
+{% endblock %}

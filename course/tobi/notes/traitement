@@ -1,0 +1,12 @@
+
+* upload de fichier
+mettre un peu de ajax suite à l'upload du fichier , extraction de l'info :
+- distance en km
+- date debut
+- vitesse moyenne
+- temps total :  mouvement + arret 
+- gpx name , description
+- autheur email  
+
+
+* utiliser motionless pour la generation d'une representation de la course.

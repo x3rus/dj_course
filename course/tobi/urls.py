@@ -11,8 +11,11 @@ from . import views
 
 urlpatterns = [
                 url(r'^$', views.IndexView, name='index'),
+                url(r'^new_perf/$', views.new_perf, name='new_perf' ),
                 url(r'^new_activity/$', views.new_activity, name='new_activity' ),
                 url(r'^login/$', 'django.contrib.auth.views.login', name="login"),
                 url(r'^logout/$', 'django.contrib.auth.views.logout', name="logout"),
+                # Json URL
+                url(r'^extract_gps_info/$', views.json_extract_gpsfile, name='json_extract_gpsfile' ),
               ]
  
