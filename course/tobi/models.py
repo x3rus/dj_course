@@ -12,8 +12,9 @@ import time
 def upload_to_gpx(instance, filename):
         return 'gpx/%s/%s/%s' % (instance.user.user.username, time.strftime("%Y/%m"),filename)
 
-# TODO : voir pour la mise en place d'un PATH meilleur 
-#        http://stackoverflow.com/questions/6350153/getting-username-in-imagefield-upload-to-path
+class gpsfile(models.Model):
+    filename = models.FileField(upload_to='documents/%Y/%m/%d')
+
 class gpsfile_model(models.Model):
     filename = models.FileField(upload_to=upload_to_gpx)
 

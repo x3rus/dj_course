@@ -7,17 +7,43 @@ $(function() {
 $('#post-activity').on('submit', function(event){
     event.preventDefault();
     console.log("form submitted gpx file!")  // sanity check
-    upload_gpx_file();
+    get_file_as_base64_and_upload('id_gpxfile');
 });
 
+//display file contents
+function get_file_as_base64_and_upload(id_element) {
+    //get file object
+    var file = document.getElementById(id_element).files[0];
+    var file_data;
+    if (file) {
+        // create reader
+        var reader = new FileReader();
+        reader.readAsText(file);
+        // TODO : avoir de l'explication je comprend que onload est un event 
+        // http://www.w3.org/TR/FileAPI/#dfn-loadstart-event , est-ce qu'il y a une
+        // autre methode que l'appel de la functione ?!?!
+        reader.onload = function(e) {
+            // browser completed reading file - display it
+            //alert(e.target.result);
+            $.base64.utf8encode = true;
+            file_data = $.base64.btoa(e.target.result);
+            upload_gpx_datafile(file_data,id_element)
+        };
+
+
+    }
+}
+
+function upload_gpx_datafile(gpsfile_data,id_fileType) {
 // AJAX for sending gpxfile
-function upload_gpx_file() {
     console.log("sending file to backend!") // sanity check
+//##    var data = new FormData($('form').get(0));
     $.ajax({
         // TODO voir pour avoir une plus belle URL lors de l'appel de la cmd json
-       url : "../extract_gps_info/", // the endpoint
+       url : "../json_upload_gpsfile/", // the endpoint
        type : "POST", // http method
-       data : { the_gpxfile: $('#id_gpxfile').val() }, // data sent with the post request
+       data : { the_gpxfile: $('#'+id_fileType).val() ,
+                the_gpxfile_data: gpsfile_data  }, // data sent with the post request
 
        // handle a successful response
        success : function(json) {
@@ -32,6 +58,12 @@ function upload_gpx_file() {
        }
     });
 
+
+
+} //FIN upload_gpx_datafile 
+
+
+function upload_gpx_file() {
 }
 
 
