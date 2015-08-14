@@ -1,0 +1,120 @@
+/*
+ * CSS Tobi web site 
+ * Author : Thomas Boutry <thomas.boutry@x3rus.com>
+ * Description :
+ *   TODO  ajouter une description
+ *
+ */
+
+
+body {
+    background-image: url("images/login-bk.jpg");
+}
+
+/*
+ * DIV content
+ */
+
+#main {
+    width: 100%;
+    margin: 100px 0px 60px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+} /* FIN main */
+
+.login_box{
+    position: relative ;
+    width: 30%;
+    margin: 200px 200px 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color : #ffffff;
+
+} /* FIN main_central */
+
+/* 
+ * HEADER 
+ */
+
+#header{
+    position: fixed;
+    top: 0; 
+    margin: auto -7px 0px; /* TODO : fix super moche, faut comprendre pourquoi j'ai le decalage a gauche */
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height:50px;
+    display: table;
+    border-color: #0F5959;
+    border-style: solid;
+}
+
+.header_left, .header_right {
+    vertical-align: middle;
+    min-height: 30em;
+    height:30px;        
+    display: table-cell;
+    background-color:#638CA6;
+    color: white;
+}
+
+.header_right {
+    text-align:right;
+
+}
+
+/* TODO  : voir s'il est possible de merger les configurations de header_left et header_right */
+
+.header_left li a {
+    color: white;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
+}
+
+.header_left ul
+{
+    margin: 0px 0px 0px; 
+}
+
+.header_right ul
+{
+    margin: 0px 0px 0px; 
+}
+
+
+.header_left ul li 
+{
+    margin: 5px;
+    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
+    vertical-align: middle; /* | top | bottom */
+    font-size: 20px;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px;
+}
+
+.header_right ul li 
+{
+    /*       display:inline; */
+    horizontal-align: right; /* TODO aligner a droite */
+    margin: 5px;
+    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
+    vertical-align: middle; /* | top | bottom */
+    font-size: 20px;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
+}
+
+
+.header_right li a {
+    color: white;
+    padding: 0px;
+    line-height: 1em;
+    margin: 0px 0px 0px; 
+}
+

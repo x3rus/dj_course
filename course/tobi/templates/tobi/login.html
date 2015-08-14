@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- 
+        ######## HEADER #######
+    -->
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tobi/login_out_style.css' %}" />
+        <title>{% block title %} Tobi Running{% endblock %}</title>
+        {% block script %} {% endblock %}
+    </head>
+
+    <!-- 
+        ######## Nav Header #######
+    -->
+
+    <!-- 
+        ######## BODY #######
+    -->
+    <body>
+
+        <!-- ### MAIN ### -->
+        <div id="main">
+            {% block content %}{% endblock %}
+        </div> <!-- Fin MAIN -->
+
+    </body>
+</html>

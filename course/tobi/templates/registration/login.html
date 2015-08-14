@@ -1,18 +1,17 @@
 
-{% extends "tobi/base.html" %}
+{% extends "tobi/login.html" %}
 {% load staticfiles %}
 
 
 {% block content %}
 
-<div class="main_central" >
+<div class="login_box" >
 
     <center>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
 
-    <img src="{% static 'tobi/images/runer-start.png' %}" alt="start runner" style="float;width:118px;height:139px;" >
 
     <form method="post" action="{% url 'tobi:login' %}">
         {% csrf_token %}
