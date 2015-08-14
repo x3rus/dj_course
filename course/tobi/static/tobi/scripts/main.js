@@ -3,6 +3,8 @@ $(function() {
     // nothing
     console.log("nothing")
 
+ $('#static_map').hide();
+
 // Submit post on submit
 $('#post-activity').on('submit', function(event){
     event.preventDefault();
@@ -47,7 +49,12 @@ function upload_gpx_datafile(gpsfile_data,id_fileType) {
 
        // handle a successful response
        success : function(json) {
-//               $('#id_gpxfile').val(''); // remove the value from the input
+               $('#id_datePerformed').val(json.start_time);// remove the value from the input
+               $('#id_distance').val(json.length);// remove the value from the input
+               $('#id_description').val(json.description);// remove the value from the input
+               $('#id_title').val(json.title);// remove the value from the input
+               $('#static_map').show();
+               $("#url_static_map").attr("src",json.url_map);
                console.log(json); // log the returned json to the console
        },
 

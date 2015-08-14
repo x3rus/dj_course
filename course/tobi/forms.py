@@ -19,14 +19,17 @@ class UploadActivityForm(forms.Form):
             label = 'Activity title',
             help_text = 'Title is required'
             )
-    datePerformed = forms.DateField(
+    datePerformed = forms.DateTimeField(
             label = 'When the activity was performed'
             )
-    dateUploaded =  forms.DateField(
+    dateUploaded =  forms.DateTimeField(
             label = 'When the activity was uploaded'
             )
     description = forms.CharField(
             label = 'Description '
+            )
+    distance= forms.FloatField(
+            label = 'Distance'
             )
     ispublic = forms.BooleanField(
             label = 'Activity is public',)

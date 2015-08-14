@@ -5,10 +5,11 @@
     -->
     <head>
         {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tobi/style.css' %}" />
         <script src="{% static 'tobi/scripts/jquery.min.js' %}"></script>
         <script src="{% static 'tobi/scripts/main.js' %}"></script>
         <script src="{% static 'tobi/scripts/jquery.base64.js' %}"></script> <!-- TODO mettre uniquement dans la page upload -->
-        <link rel="stylesheet" type="text/css" href="{% static 'tobi/style.css' %}" />
+
         <title>{% block title %} Tobi Running{% endblock %}</title>
         {% block script %} {% endblock %}
     </head>

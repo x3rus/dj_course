@@ -28,6 +28,12 @@ from .models import gpsfile_model, activity
 from .forms import GpxUploadForm # TODO a term supprimer 
 from .forms import UploadActivityForm
 
+# motionless modules
+from motionless import AddressMarker, LatLonMarker,DecoratedMap, CenterMap, VisibleMap
+from .gpx_class import GPXHandler
+import xml.sax
+
+
 ##############
 #  My Views  #
 ##############
@@ -83,6 +89,10 @@ def new_perf(request):
                 context_instance=RequestContext(request)
             )
 
+#################
+# Json function #
+#################
+
 @login_required
 def json_upload_gpsfile(request):
     if request.method == 'POST':
@@ -109,6 +119,9 @@ def json_upload_gpsfile(request):
         response_data['end_time'] = str(gpx_basic_info['end_time'])
         response_data['length'] = gpx_basic_info['length']
         response_data['moving_time'] = gpx_basic_info['moving_time']
+        response_data['description'] = gpx_basic_info['description']
+        response_data['title'] = gpx_basic_info['name']
+        response_data['url_map'] = gpx_basic_info['url_map']
 
         # TODO clean up tempfile
         os.remove(tempfile_name)
@@ -123,6 +136,9 @@ def json_upload_gpsfile(request):
             content_type="application/json"
         )
 
+####################
+# Backend function #
+####################
 
 def extract_gpx_basic_info(gpx_file_name):
     basic_info = {}
@@ -148,6 +164,15 @@ def extract_gpx_basic_info(gpx_file_name):
 
     moving_time, stopped_time, moving_distance, stopped_distance, max_speed = gpx.get_moving_data()
     basic_info['moving_time'] = moving_time
+
+    # create URL for static image map 
+    static_map = DecoratedMap(size_x=640,size_y=640,pathweight=8,pathcolor='blue')
+    parser = xml.sax.make_parser()
+    parser.setContentHandler(GPXHandler(static_map))
+    parser.feed(open(gpx_file_name).read())
+    basic_info['url_map'] = static_map.generate_url()
+
+
 
     return basic_info
 
