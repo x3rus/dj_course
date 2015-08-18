@@ -15,7 +15,15 @@
 
     <form method="post" action="{% url 'tobi:login' %}">
         {% csrf_token %}
-        <table>
+        <p>
+        {{ form.username.label_tag }} <br>
+        {{ form.username}} 
+        </p>
+        <p>
+        {{ form.password.label_tag }} <br>
+        {{ form.password}} 
+        </p>
+<!--        <table>
             <tr>
                 <td>{{ form.username.label_tag }}</td>
                 <td>{{ form.username }}</td>
@@ -24,7 +32,7 @@
                 <td>{{ form.password.label_tag }}</td>
                 <td>{{ form.password }}</td>
             </tr>
-        </table>
+            </table> -->
         <input type="submit" value="login" />
         <input type="hidden" name="next" value="{{ next }}" />
     </form>

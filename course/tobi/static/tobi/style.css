@@ -15,115 +15,112 @@
  *  light green blue (turquoise claire) : 17A697
  *
  */
-
-
-body {
-    background-color: #BFD4D9;
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow:hidden;
+    font-family: helvetica;
+    font-weight: 100;
 }
-
-/*
- * DIV content
- */
-
-#main {
+.container {
+    position: relative;
+    height: 100%;
     width: 100%;
-    margin: 100px 0px 60px;
+    left: 0;
+    -webkit-transition:  left 0.4s ease-in-out;
+    -moz-transition:  left 0.4s ease-in-out;
+    -ms-transition:  left 0.4s ease-in-out;
+    -o-transition:  left 0.4s ease-in-out;
+    transition:  left 0.4s ease-in-out;
+}
+
+.container.open-sidebar {
+    left: 240px;
+}
+
+/*#.swipe-area {
+    position: absolute;
+    width: 50px;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #f3f3f3;
+    z-index: 0;
+}*/
+
+#sidebar {
+    position: absolute;
+    left: -240px;
+    background: #000000;
+    width: 240px;
+    height: 100%;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-} /* FIN main */
-
-.main_central{
-    position: relative ;
-    width: 50%;
-    margin: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-} /* FIN main_central */
-
-/* 
- * HEADER 
- */
-
-#header{
-    position: fixed;
-    top: 0; 
-    margin: auto -7px 0px; /* TODO : fix super moche, faut comprendre pourquoi j'ai le decalage a gauche */
+}
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#sidebar ul li {
+    margin: 0;
+}
+#sidebar ul li a {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 100;
+    color: white;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #98A026;
+    -webkit-transition:  background 0.3s ease-in-out;
+    -moz-transition:  background 0.3s ease-in-out;
+    -ms-transition:  background 0.3s ease-in-out;
+    -o-transition:  background 0.3s ease-in-out;
+    transition:  background 0.3s ease-in-out;
+}
+#sidebar ul li:hover a {
+    background: #98A026;
+}
+.main-content {
     width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
     box-sizing: border-box;
-    height:50px;
-    display: table;
-    border-color: #0F5959;
-    border-style: solid;
+    -moz-box-sizing: border-box;
+    position: relative;
+    background-color: #000000;
+    color : #ffffff;
 }
-
-.header_left, .header_right {
-    vertical-align: middle;
-    min-height: 30em;
-    height:30px;        
-    display: table-cell;
-    background-color:#638CA6;
-    color: white;
+.main-content .content{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding-left: 60px;
+    width: 100%;
 }
-
-.header_right {
-    text-align:right;
-
+.main-content .content h1{
+    font-weight: 100;
 }
-
-/* TODO  : voir s'il est possible de merger les configurations de header_left et header_right */
-
-.header_left li a {
-    color: white;
-    padding: 0px;
-    line-height: 1em;
-    margin: 0px 0px 0px; 
+.main-content .content p{
+    width: 100%;
+    line-height: 160%;
 }
-
-.header_left ul
-{
-    margin: 0px 0px 0px; 
+.main-content #sidebar-toggle {
+    background: #98A026;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    padding: 10px 7px;
+    float: left;
 }
-
-.header_right ul
-{
-    margin: 0px 0px 0px; 
+.main-content #sidebar-toggle .bar{
+    display: block;
+    width: 18px;
+    margin-bottom: 3px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;   
 }
-
-
-.header_left ul li 
-{
-    margin: 5px;
-    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
-    vertical-align: middle; /* | top | bottom */
-    font-size: 20px;
-    padding: 0px;
-    line-height: 1em;
-    margin: 0px 0px 0px;
+.main-content #sidebar-toggle .bar:last-child{
+    margin-bottom: 0;   
 }
-
-.header_right ul li 
-{
-    /*       display:inline; */
-    horizontal-align: right; /* TODO aligner a droite */
-    margin: 5px;
-    display: inline-block;  /* TODO voir la difference entre inline et inline-block */
-    vertical-align: middle; /* | top | bottom */
-    font-size: 20px;
-    padding: 0px;
-    line-height: 1em;
-    margin: 0px 0px 0px; 
-}
-
-
-.header_right li a {
-    color: white;
-    padding: 0px;
-    line-height: 1em;
-    margin: 0px 0px 0px; 
-}
-

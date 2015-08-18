@@ -9,41 +9,64 @@
         <script src="{% static 'tobi/scripts/jquery.min.js' %}"></script>
         <script src="{% static 'tobi/scripts/main.js' %}"></script>
         <script src="{% static 'tobi/scripts/jquery.base64.js' %}"></script> <!-- TODO mettre uniquement dans la page upload -->
-
-        <title>{% block title %} Tobi Running{% endblock %}</title>
-        {% block script %} {% endblock %}
+        <script>
+            $(document).ready(function() {
+                $("[data-toggle]").click(function() {
+                    var toggle_el = $(this).data("toggle");
+                    $(toggle_el).toggleClass("open-sidebar");
+                });
+            });
+            $(".swipe-area").swipe({
+                swipeStatus:function(event, phase, direction, distance, duration, fingers)
+                {
+                    if (phase=="move" && direction =="right") {
+                        $(".container").addClass("open-sidebar");
+                        return false;
+                    }
+                    if (phase=="move" && direction =="left") {
+                        $(".container").removeClass("open-sidebar");
+                        return false;
+                    }
+                }
+            });
+          </script>
+          <title>{% block title %} Tobi Running{% endblock %}</title>
+          {% block script %} {% endblock %}
     </head>
 
-    <!-- 
-        ######## Nav Header #######
-    -->
-    <div id="header">
-            <div class="header_left">
-                <ul>
-                    <li> <img src="{% static 'tobi/images/Neoclassical_Velocity.JPG' %}" alt="Logo small" style="float;width:50px;height:35px;" > </li>
-                    <li> <a href="/tobi/">home page </a></li> 
-                </ul>
-            </div> <!--Fin header_left -->
-            <div class="header_right">
-                <ul>
-                    <!-- TODO : modifier pour que l'affichage soit login quand l'utilisateur est anonymous
-                        ou logout quand l'utilisateur est deja authentifier -->
-                    <li> <a href="/tobi/login">login / logout </a></li> 
-                </ul>
-            </div><!--Fin header_right-->
-        </div> <!-- Fin header -->
-
-
-
-    <!-- 
-        ######## BODY #######
-    -->
     <body>
 
-        <!-- ### MAIN ### -->
-        <div id="main">
-            {% block content %}{% endblock %}
-        </div> <!-- Fin MAIN -->
+        <!-- Contenu  -->
+        <div class="container">
+            <!-- 
+                ######## Nav side bar#######
+            -->
+            <div id="sidebar">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
+            </div>
+            <!-- 
+                ######## BODY #######
+            -->
+            <!-- ### MAIN ### -->
+            <div class="main-content">
+                <!-- Button that show sidebar -->
+                <div class="swipe-area"></div>
+                <a href="#" data-toggle=".container" id="sidebar-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </a>
+                <div class="content">
+                    {% block content %}{% endblock %}
+                </div> <!-- Fin content -->
+            </div> <!-- Fin Main -->
+        </div> <!-- Fin container -->
+
 
     </body>
 </html>
