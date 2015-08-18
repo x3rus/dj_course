@@ -80,12 +80,12 @@ def new_perf(request):
         form = UploadActivityForm() # A empty, unbound form
 
     # Load activity for the user connected
-    activitys = activity.objects.filter(owner=request.user)
+    # activitys = activity.objects.filter(owner=request.user)
 
     # Render list page with the documents and the form
     return render_to_response(
            'tobi/upload_activity.html',
-                {'activitys': activitys, 'form': form},
+                {'form': form},
                 context_instance=RequestContext(request)
             )
 

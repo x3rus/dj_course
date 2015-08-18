@@ -11,8 +11,8 @@ class GpxUploadForm(forms.Form):
 
 class UploadActivityForm(forms.Form):
     gpxfile = forms.FileField(
-            label='Select a file',
-            help_text='max. 42 megabytes',
+            label='Select your GPX file',
+            help_text='(max. 42 megabytes)',
             ) 
     title = forms.CharField(
             max_length=255,

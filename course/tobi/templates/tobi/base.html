@@ -16,6 +16,7 @@
                     $(toggle_el).toggleClass("open-sidebar");
                 });
             });
+            <!-- TODO : fixe swipe-area fonctionne pas erreur dans le css -->
             $(".swipe-area").swipe({
                 swipeStatus:function(event, phase, direction, distance, duration, fingers)
                 {
@@ -43,9 +44,9 @@
             -->
             <div id="sidebar">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Explore</a></li>
-                    <li><a href="#">Users</a></li>
+                    <li><a href="/tobi/">Home</a></li>
+                    <li><a href="/tobi/new_perf">Add activity</a></li>
+                    <li><a href="/tobi/view_activity">View Activity</a></li>
                     <li><a href="#">Sign Out</a></li>
                 </ul>
             </div>

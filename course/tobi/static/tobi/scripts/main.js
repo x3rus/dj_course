@@ -3,7 +3,8 @@ $(function() {
     // nothing
     console.log("nothing")
 
- $('#static_map').hide();
+$('#static_map').hide();
+$('#form-info').hide();
 
 // Submit post on submit
 $('#post-activity').on('submit', function(event){
@@ -54,6 +55,7 @@ function upload_gpx_datafile(gpsfile_data,id_fileType) {
                $('#id_description').val(json.description);// remove the value from the input
                $('#id_title').val(json.title);// remove the value from the input
                $('#static_map').show();
+               $('#form-info').show();
                $("#url_static_map").attr("src",json.url_map);
                console.log(json); // log the returned json to the console
        },
