@@ -175,3 +175,79 @@ body, html {
 
 .expanded_full_sidebar-info {right: 0px;}
 .collapsed_full_sidebar-info {right: -645px;}
+
+
+/* Formulaire */
+
+.form_tobi{
+    width: 800px;
+    font-size: 16px;
+    background: #000;
+/*    padding: 30px 30px 15px 30px;
+    border: 5px solid #53687E;*/
+}
+.form_tobi input[type=submit],
+.form_tobi input[type=button],
+.form_tobi input[type=text],
+.form_tobi input[type=email],
+.form_tobi textarea,
+.form_tobi label
+{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: #fff;
+
+}
+.form_tobi label {
+    display:block;
+    margin-bottom: 10px;
+}
+.form_tobi label > span{
+    display: inline-block;
+/*    float: left; */
+    width: 150px;
+}
+.form_tobi input[type=text],
+.form_tobi input[type=email]
+{
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #83A4C5;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+    font-style: italic;
+}
+.form_tobi textarea{
+    font-style: italic;
+    padding: 0px 0px 0px 0px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed #83A4C5;
+    width: 275px;
+    overflow: hidden;
+    resize:none;
+    height:20px;
+}
+
+.form_tobi textarea:focus,
+.form_tobi input[type=text]:focus,
+.form_tobi input[type=email]:focus,
+.form_tobi input[type=email] :focus
+{
+    border-bottom: 1px dashed #D9FFA9;
+}
+
+.form_tobi input[type=submit],
+.form_tobi input[type=button]{
+    background: #658230;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+.form_tobi input[type=submit]:hover,
+.form_tobi input[type=button]:hover{
+background: #E1B902;
+}

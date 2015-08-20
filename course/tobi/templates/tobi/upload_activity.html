@@ -24,24 +24,51 @@
 
 <h1> Add a new  Activity </h1>
 
-        <!-- Upload form. Note enctype attribute! -->
-        <form action="{% url 'tobi:new_perf' %}" method="post" enctype="multipart/form-data" id="post-activity">
+        <!-- Upload form. Note enctype attribute!
+        <form class="form-style-4" action="" method="post">
+            <label for="field1">
+                <span>Enter Your Name</span><input type="text" name="field1" required="true" />
+            </label>
+            <label for="field2">
+                <span>Email Address</span><input type="email" name="field2" required="true" />
+            </label>
+            <label for="field3">
+                <span>Short Subject</span><input type="text" name="field3" required="true" />
+            </label>
+            <label for="field4">
+                <span>Message to Us</span><textarea name="field4" onkeyup="adjust_textarea(this)" required="true"></textarea>
+            </label>
+            <label>
+                <span>&nbsp;</span><input type="submit" value="Send Letter" />
+            </label>
+        </form>  -->
+        <form class="form_tobi" action="{% url 'tobi:new_perf' %}" method="post" enctype="multipart/form-data" id="post-activity">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.gpxfile.label_tag }} {{ form.gpxfile.help_text }}</p>
-            {{ form.gpxfile.errors }}
-            <p>
+            <p>{{ form.gpxfile.label_tag }} {{ form.gpxfile.help_text }}
+            {{ form.gpxfile.errors }} <br>
             {{ form.gpxfile }}  <input type="submit" value="Upload" />
             </p>
             
             <div id="form-info" >
-                <p> {{form.title.label}}  {{form.title }}</p>
-                <p> {{form.datePerformed.label}}  {{form.datePerformed}}</p>
-                <p> {{form.dateUploaded.label}}  {{form.dateUploaded}}</p>
-                <p> {{form.description.label}}  {{form.description}}</p>
-                <p> {{form.distance.label}}  {{form.distance}}</p>
-                <p> {{form.ispublic.label}}  {{form.ispublic}}</p>
-            </p>
+                <label>
+                    <span> {{form.title.label}} </span> {{form.title }}
+                </label>
+                <label>
+                    <span> {{form.datePerformed.label}} </span> {{form.datePerformed}}
+                </label>
+                <label>
+                    <span> {{form.dateUploaded.label}} </span> {{form.dateUploaded}}
+                </label>
+                <label>
+                    <span> {{form.description.label}} </span> {{form.description}}
+                </label>
+                <label>
+                    <span> {{form.distance.label}} </span> {{form.distance}}
+                </label>
+                <label>
+                    <span> {{form.ispublic.label}} </span> {{form.ispublic}}
+                </label>
             </div>
         </form>
 
