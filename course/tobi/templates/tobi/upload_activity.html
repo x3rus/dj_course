@@ -1,7 +1,26 @@
 {% extends "tobi/base.html" %}
 
-
+{% load staticfiles%}
 {% block content %}
+
+
+       <!-- <a href="#" data-toggle=".infobar" id="sidebar-info">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <br>
+            <b>M</b><br>
+            <b>A</b><br>
+            <b>P</b><br>
+            </a> -->
+ 
+        <div class="sidebar-info" id="side_info_map">
+            <img src="{% static 'tobi/images/Plain-Arrows_to-left.png' %}" id="left-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+            <img src="{% static 'tobi/images/Plain-Arrows_to-right.png' %}" id="right-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+            <p id='static_map'> 
+                    <img id="url_static_map" src=""> 
+            </p>
+        </div>
 
 <h1> Add a new  Activity </h1>
 
@@ -22,9 +41,8 @@
                 <p> {{form.description.label}}  {{form.description}}</p>
                 <p> {{form.distance.label}}  {{form.distance}}</p>
                 <p> {{form.ispublic.label}}  {{form.ispublic}}</p>
-                <p id='static_map'> Map : <br> 
-                    <img id="url_static_map" src=""> 
             </p>
             </div>
         </form>
+
 {% endblock %}

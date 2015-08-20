@@ -5,6 +5,28 @@ $(function() {
 
 $('#static_map').hide();
 $('#form-info').hide();
+$('#side_info_map').hide();
+
+/* REF : http://stackoverflow.com/questions/253689/switching-a-div-background-image-with-jquery */
+$('#left-arrow').click(function(){
+    console.log("click left arrow");
+    if($('#side_info_map').hasClass('expanded_full_sidebar-info')) {
+        $('#side_info_map').addClass('collapsed_full_sidebar-info').removeClass('expanded_full_sidebar-info');
+    } else {
+        $('#side_info_map').addClass('expanded_full_sidebar-info').removeClass('collapsed_full_sidebar-info');
+    } /* fi expanded*/
+    console.log("click left arrow done");
+});
+
+$('#right-arrow').click(function(){
+    console.log("click right arrow");
+    if($('#side_info_map').hasClass('')) {
+        $('#side_info_map').addClass('expanded_full_sidebar-info').removeClass('collapsed_full_sidebar-info');
+    } else {
+        $('#side_info_map').addClass('collapsed_full_sidebar-info').removeClass('expanded_full_sidebar-info');
+    } /* fi expanded*/
+});
+
 
 // Submit post on submit
 $('#post-activity').on('submit', function(event){
@@ -57,6 +79,7 @@ function upload_gpx_datafile(gpsfile_data,id_fileType) {
                $('#static_map').show();
                $('#form-info').show();
                $("#url_static_map").attr("src",json.url_map);
+               $('#side_info_map').show();
                console.log(json); // log the returned json to the console
        },
 

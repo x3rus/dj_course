@@ -38,6 +38,11 @@ body, html {
     left: 140px;
 }
 
+.infobar.open-sidebar {
+    left: 340px;
+}
+
+
 /*#.swipe-area {
     position: absolute;
     width: 50px;
@@ -46,7 +51,19 @@ body, html {
     height: 100%;
     background: #f3f3f3;
     z-index: 0;
-}*/
+}
+
+#*/
+
+#infobar {
+    position: absolute;
+    right -340px;
+    background: #000000;
+    width: 340px;
+    height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
 
 #sidebar {
     position: absolute;
@@ -129,3 +146,32 @@ body, html {
 .main-content #sidebar-toggle .bar:last-child{
     margin-bottom: 0;   
 }
+
+.sidebar-info{
+    background: #000;
+    width: 650px;
+    height: 100%;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    padding: 10px 7px;
+    float: right;
+    right: -450px;
+    border-left-color: #000;
+    border-right-color: #000000;
+    border-top-color: #E1B902;
+    border-bottom-color:  #E1B902;
+    border-style: solid;
+}
+
+.sidebar-info .bar{
+    display: block;
+    width: 18px;
+    margin-bottom: 3px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 10px;   
+}
+
+.expanded_full_sidebar-info {right: 0px;}
+.collapsed_full_sidebar-info {right: -645px;}
