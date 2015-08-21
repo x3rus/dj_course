@@ -111,13 +111,13 @@ def json_upload_gpsfile(request):
         tmpfile.write(gpsfile_data_flat)
         tmpfile.close()
 
-        gpx_basic_info = extract_gpx_basic_info(tempfile_name)
+        gpx_basic_info = extract_gpx_basic_info(tempfile_name,gpsfile)
         response_data = {}
         response_data['result'] = 'Good GPXfile!'
         response_data['author'] = request.user.username
-        response_data['start_time'] = str(gpx_basic_info['start_time'])
+        response_data['start_time'] = str(gpx_basic_info['start_time']).rsplit('.',1)[0]
         response_data['end_time'] = str(gpx_basic_info['end_time'])
-        response_data['length'] = gpx_basic_info['length']
+        response_data['length'] = round(gpx_basic_info['length'],2)
         response_data['moving_time'] = gpx_basic_info['moving_time']
         response_data['description'] = gpx_basic_info['description']
         response_data['title'] = gpx_basic_info['name']
@@ -140,7 +140,7 @@ def json_upload_gpsfile(request):
 # Backend function #
 ####################
 
-def extract_gpx_basic_info(gpx_file_name):
+def extract_gpx_basic_info(gpx_file_name,original_file_name="none"):
     basic_info = {}
     basic_info['name'] = 'unknown'
     basic_info['description'] = 'unknown'
@@ -151,7 +151,8 @@ def extract_gpx_basic_info(gpx_file_name):
 
     if gpx.name:
         basic_info['name'] = gpx.name
-        print('  GPX name: %s' % gpx.name)
+    else :
+        basic_info['name'] = original_file_name.rsplit('.', 1)[0]
     if gpx.description:
         basic_info['description'] = gpx.description
     if gpx.author:
@@ -160,7 +161,8 @@ def extract_gpx_basic_info(gpx_file_name):
         basic_info['email'] = gpx.email
 
     basic_info['start_time'],basic_info['end_time'] = gpx.get_time_bounds()
-    basic_info['length'] = gpx.length_2d()
+    # Set value in kilometers
+    basic_info['length'] = gpx.length_2d() / 1000
 
     moving_time, stopped_time, moving_distance, stopped_distance, max_speed = gpx.get_moving_data()
     basic_info['moving_time'] = moving_time

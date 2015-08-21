@@ -1,7 +1,8 @@
 $(function() {
 
-    // nothing
-    console.log("nothing")
+var gpxFileSubmitted=false
+// nothing
+console.log("nothing")
 
 $('#static_map').hide();
 $('#form-info').hide();
@@ -30,8 +31,13 @@ $('#right-arrow').click(function(){
 // Submit post on submit
 $('#post-activity').on('submit', function(event){
     event.preventDefault();
-    console.log("form submitted gpx file!")  // sanity check
-    get_file_as_base64_and_upload('id_gpxfile');
+    if ( gpxFileSubmitted == false) {
+        console.log("form submitted gpx file!")  // sanity check
+        get_file_as_base64_and_upload('id_gpxfile');
+    } else {
+        console.log("File already submitted")  // sanity check
+    }
+
 });
 
 //display file contents
@@ -80,6 +86,7 @@ function upload_gpx_datafile(gpsfile_data,id_fileType) {
                $("#url_static_map").attr("src",json.url_map);
                $('#side_info_map').show();
                console.log(json); // log the returned json to the console
+               gpxFileSubmitted=true;
        },
 
        // handle a non-successful response

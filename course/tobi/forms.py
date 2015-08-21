@@ -22,9 +22,6 @@ class UploadActivityForm(forms.Form):
     datePerformed = forms.DateTimeField(
             label = 'When the activity was performed'
             )
-    dateUploaded =  forms.DateTimeField(
-            label = 'When the activity was uploaded'
-            )
     description = forms.CharField(
             label = 'Description ',
             widget = forms.Textarea(attrs = {
@@ -33,7 +30,11 @@ class UploadActivityForm(forms.Form):
                      )
             )
     distance= forms.FloatField(
-            label = 'Distance'
+            label = 'Distance',
+             widget = forms.NumberInput(attrs = {
+                     'readonly' : "readonly",
+                        }
+                     )
             )
     ispublic = forms.BooleanField(
             label = 'Activity is public',)
