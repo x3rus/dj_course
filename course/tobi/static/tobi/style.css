@@ -18,9 +18,10 @@
 body, html {
     height: 100%;
     margin: 0;
-    overflow:hidden;
+    overflow:hidden; 
     font-family: helvetica;
     font-weight: 100;
+    background: #000000;
 }
 .container {
     position: relative;
@@ -153,7 +154,7 @@ body, html {
     height: 100%;
     border-radius: 3px;
     display: block;
-    position: relative;
+    position: absolute;
     padding: 10px 7px;
     float: right;
     right: -450px;
@@ -225,8 +226,8 @@ body, html {
     outline: none;
     border: none;
     border-bottom: 1px dashed #83A4C5;
-    width: 275px;
-    overflow: hidden;
+    width: 375px;
+ /*   overflow: hidden;*/
     resize:none;
     height:20px;
 }

@@ -26,7 +26,11 @@ class UploadActivityForm(forms.Form):
             label = 'When the activity was uploaded'
             )
     description = forms.CharField(
-            label = 'Description '
+            label = 'Description ',
+            widget = forms.Textarea(attrs = {
+                     'onkeyup' : "adjust_textarea(this)",
+                        }
+                     )
             )
     distance= forms.FloatField(
             label = 'Distance'

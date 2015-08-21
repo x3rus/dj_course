@@ -1,6 +1,21 @@
 {% extends "tobi/base.html" %}
 
 {% load staticfiles%}
+{% block script %}
+
+<script>
+// Quand je met la definition dans main.js il ne trouve pas la function :-/
+//auto expand textarea
+function adjust_textarea(h) {
+    // Increase de size for max 100px
+    if (h.scrollHeight < 100 ) {
+        h.style.height = "20px";
+        h.style.height = (h.scrollHeight)+"px";
+    }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 

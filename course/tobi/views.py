@@ -166,7 +166,7 @@ def extract_gpx_basic_info(gpx_file_name):
     basic_info['moving_time'] = moving_time
 
     # create URL for static image map 
-    static_map = DecoratedMap(size_x=640,size_y=640,pathweight=8,pathcolor='blue')
+    static_map = DecoratedMap(size_x=640,size_y=600,pathweight=8,pathcolor='blue')
     parser = xml.sax.make_parser()
     parser.setContentHandler(GPXHandler(static_map))
     parser.feed(open(gpx_file_name).read())

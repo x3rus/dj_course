@@ -27,7 +27,6 @@ $('#right-arrow').click(function(){
     } /* fi expanded*/
 });
 
-
 // Submit post on submit
 $('#post-activity').on('submit', function(event){
     event.preventDefault();
