@@ -19,16 +19,6 @@ function adjust_textarea(h) {
 {% block content %}
 
 
-       <!-- <a href="#" data-toggle=".infobar" id="sidebar-info">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <br>
-            <b>M</b><br>
-            <b>A</b><br>
-            <b>P</b><br>
-            </a> -->
- 
         <div class="sidebar-info" id="side_info_map">
             <img src="{% static 'tobi/images/Plain-Arrows_to-left.png' %}" id="left-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
             <img src="{% static 'tobi/images/Plain-Arrows_to-right.png' %}" id="right-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
@@ -39,30 +29,12 @@ function adjust_textarea(h) {
 
 <h1> Add a new  Activity </h1>
 
-        <!-- Upload form. Note enctype attribute!
-        <form class="form-style-4" action="" method="post">
-            <label for="field1">
-                <span>Enter Your Name</span><input type="text" name="field1" required="true" />
-            </label>
-            <label for="field2">
-                <span>Email Address</span><input type="email" name="field2" required="true" />
-            </label>
-            <label for="field3">
-                <span>Short Subject</span><input type="text" name="field3" required="true" />
-            </label>
-            <label for="field4">
-                <span>Message to Us</span><textarea name="field4" onkeyup="adjust_textarea(this)" required="true"></textarea>
-            </label>
-            <label>
-                <span>&nbsp;</span><input type="submit" value="Send Letter" />
-            </label>
-        </form>  -->
         <form class="form_tobi" action="{% url 'tobi:new_perf' %}" method="post" enctype="multipart/form-data" id="post-activity">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
             <p>{{ form.gpxfile.label_tag }} {{ form.gpxfile.help_text }}
             {{ form.gpxfile.errors }} <br>
-            {{ form.gpxfile }}  <input type="submit" value="Upload" />
+            {{ form.gpxfile }}  <input type="submit" name="action" value="Upload" />
             </p>
             
             <div id="form-info" >
@@ -80,6 +52,9 @@ function adjust_textarea(h) {
                 </label>
                 <label>
                     <span> {{form.ispublic.label}} </span> {{form.ispublic}}
+                </label>
+                <label>
+                    <span> </span> <input type="submit" value="Save" name="action"/>
                 </label>
             </div>
         </form>

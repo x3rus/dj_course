@@ -31,8 +31,8 @@ class activity(models.Model):
     dateUploaded =  models.DateField()
     description = models.TextField()
     distance= models.FloatField()
-    gpxFile = gpsfile_model # TODO voir si j'en fait une clef etrangere
-    ispublic = models.BooleanField(False)
+    gpxFile = models.FileField(upload_to=upload_to_gpx) #gpsfile_model # TODO voir si j'en fait une clef etrangere
+    ispublic = models.BooleanField(default=False)
     owner = models.ForeignKey(User)
     ACTIVITY_STATE= (
                         ('FL', 'Final'),

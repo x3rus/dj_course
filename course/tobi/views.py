@@ -18,6 +18,7 @@ import json
 import base64
 import tempfile # use to create temporary file 
 import os # for clean tempfile
+import datetime 
 
 # extract gpx info
 import gpxpy as mod_gpxpy
@@ -97,7 +98,7 @@ def new_perf(request):
 def json_upload_gpsfile(request):
     if request.method == 'POST':
         #gpsfile = gpsfile_model(filename= request.FILES('the_gpxfile'))
-#        gpsfile = gpsfile_model(filename= request.POST.get('the_gpxfile'))
+        #gpsfile = gpsfile_model(filename= request.POST.get('the_gpxfile'))
         gpsfile = request.POST.get('the_gpxfile')
         gpsfile_data = request.POST.get('the_gpxfile_data')
         gpsfile_data_flat = base64.b64decode(gpsfile_data)
@@ -123,7 +124,20 @@ def json_upload_gpsfile(request):
         response_data['title'] = gpx_basic_info['name']
         response_data['url_map'] = gpx_basic_info['url_map']
 
-        # TODO clean up tempfile
+        # TODO faire une validation des donnees avant la sauvegarde
+
+        drafted_activity = activity()
+        drafted_activity.title = gpx_basic_info['name']
+        drafted_activity.datePerformed = gpx_basic_info['start_time']
+        drafted_activity.dateUploaded = datetime.datetime.now()
+        drafted_activity.description =  gpx_basic_info['description']
+        drafted_activity.distance= gpx_basic_info['length']
+        drafted_activity.gpxFile = gpsfile_data_flat
+        drafted_activity.owner = request.user
+ 
+        drafted_activity.save()
+
+        # Clean up tempfile
         os.remove(tempfile_name)
 
         return HttpResponse(
