@@ -12,6 +12,7 @@ from . import views
 urlpatterns = [
                 url(r'^$', views.IndexView, name='index'),
                 url(r'^new_perf/$', views.new_perf, name='new_perf' ),
+#                url(r'^view_activity/$', views.view_activity, name='view_activity' ),
                 url(r'^new_activity/$', views.new_activity, name='new_activity' ),
                 url(r'^login/$', 'django.contrib.auth.views.login', name="login"),
                 url(r'^logout/$', 'django.contrib.auth.views.logout', name="logout"),

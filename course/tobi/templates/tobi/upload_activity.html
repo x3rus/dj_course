@@ -31,10 +31,13 @@ function adjust_textarea(h) {
 
         <form class="form_tobi" action="{% url 'tobi:new_perf' %}" method="post" enctype="multipart/form-data" id="post-activity">
             {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
+            <p> 
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+            </p>
             <p>{{ form.gpxfile.label_tag }} {{ form.gpxfile.help_text }}
             {{ form.gpxfile.errors }} <br>
-            {{ form.gpxfile }}  <input type="submit" name="action" value="Upload" />
+            {{ form.gpxfile }}  <input type="button" id="upload_gpx" value="Upload" />
             </p>
             
             <div id="form-info" >
@@ -54,8 +57,15 @@ function adjust_textarea(h) {
                     <span> {{form.ispublic.label}} </span> {{form.ispublic}}
                 </label>
                 <label>
-                    <span> </span> <input type="submit" value="Save" name="action"/>
+                    <span> </span> <input type="submit" id="save" value="Save" name="save" /> 
                 </label>
+                <label>
+                    <span> </span> <input type="submit" id="cancel" value="Cancel" name="cancel"/>
+                </label>
+                {# Include the hidden fields #}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
             </div>
         </form>
 

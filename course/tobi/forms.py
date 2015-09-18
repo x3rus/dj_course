@@ -10,6 +10,7 @@ class GpxUploadForm(forms.Form):
             )
 
 class UploadActivityForm(forms.Form):
+    # TODO : a analyser : http://stackoverflow.com/questions/15795869/django-modelform-to-have-a-hidden-input
     gpxfile = forms.FileField(
             label='Select your GPX file',
             help_text='(max. 42 megabytes)',
@@ -37,5 +38,10 @@ class UploadActivityForm(forms.Form):
                      )
             )
     ispublic = forms.BooleanField(
-            label = 'Activity is public',)
+            required=False,
+            label = 'Activity is public'
+            )
+    activity_id = forms.CharField(
+            widget=forms.HiddenInput()
+            )
 

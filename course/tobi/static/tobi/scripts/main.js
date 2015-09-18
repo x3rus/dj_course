@@ -1,6 +1,9 @@
 $(function() {
 
+// Variable global
 var gpxFileSubmitted=false
+var activity_server_id=0
+
 // nothing
 console.log("nothing")
 
@@ -29,7 +32,14 @@ $('#right-arrow').click(function(){
 });
 
 // Submit post on submit
-$('#post-activity').on('submit', function(event){
+// TODO vraiment pas sur que c'est bien de faire l'operation ainsi ... 
+//$('#post-activity').on('submit', function(event){
+//    event.preventDefault();
+//    console.log("Disable submit !")  // sanity check
+//});
+
+// upload button
+$( "#upload_gpx" ).click(function(event){
     event.preventDefault();
     if ( gpxFileSubmitted == false) {
         console.log("form submitted gpx file!")  // sanity check
@@ -81,6 +91,7 @@ function upload_gpx_datafile(gpsfile_data,id_fileType) {
                $('#id_distance').val(json.length);// remove the value from the input
                $('#id_description').val(json.description);// remove the value from the input
                $('#id_title').val(json.title);// remove the value from the input
+               $('#id_activity_id').val(json.activity_id);// set the hidden activity_id field with id from server
                $('#static_map').show();
                $('#form-info').show();
                $("#url_static_map").attr("src",json.url_map);

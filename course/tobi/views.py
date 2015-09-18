@@ -67,16 +67,31 @@ def new_activity(request):
                 context_instance=RequestContext(request)
             )
 
+#@login_required
+##def view_activity(request):
+#    print "toto"
+
 @login_required
 def new_perf(request):
     # Handle file upload
     if request.method == 'POST':
         form = UploadActivityForm(request.POST, request.FILES)
         if form.is_valid():
-            # TODO ajouter la sauvegarde :D
+            activity_id = form.cleaned_data['activity_id']
+            # TODO ajouter la sauvegarde :D ou la suppression selon le bouton appuye
+            if 'save' in request.POST:
+                New_activity = get_object_or_404(activity, id=activity_id)    
+                New_activity.activity_status='FL'
+                New_activity.save()
+                return HttpResponseRedirect('/tobi/')
+            elif 'cancel' in request.POST:
+                wrong_activity = get_object_or_404(activity, id=activity_id)    
+                wrong_activity.delete()
+                return HttpResponseRedirect('/tobi/new_perf')
+            else :
+                return HttpResponseRedirect('/tobi/merde_pas_suppose')
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect('/tobi/')
     else:
         form = UploadActivityForm() # A empty, unbound form
 
@@ -136,6 +151,8 @@ def json_upload_gpsfile(request):
         drafted_activity.owner = request.user
  
         drafted_activity.save()
+
+        response_data['activity_id'] = drafted_activity.id
 
         # Clean up tempfile
         os.remove(tempfile_name)

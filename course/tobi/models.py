@@ -27,8 +27,8 @@ class activity(models.Model):
     # TODO : Voir pour les autre type disponible ... 
     # https://docs.djangoproject.com/en/1.8/ref/models/fields/
     title = models.CharField(max_length=255)
-    datePerformed =  models.DateField()
-    dateUploaded =  models.DateField()
+    datePerformed =  models.DateTimeField()
+    dateUploaded =  models.DateTimeField()
     description = models.TextField()
     distance= models.FloatField()
     gpxFile = models.FileField(upload_to=upload_to_gpx) #gpsfile_model # TODO voir si j'en fait une clef etrangere
