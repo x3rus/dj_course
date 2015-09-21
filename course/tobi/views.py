@@ -67,9 +67,11 @@ def new_activity(request):
                 context_instance=RequestContext(request)
             )
 
-#@login_required
-##def view_activity(request):
-#    print "toto"
+@login_required
+def list_activitys(request):
+#    private_user_activitys = activity.objects.filter(ispublic=False).filter(owner=request.user)
+    user_activitys = activity.objects.filter(owner=request.user)
+    return render(request, 'tobi/list_activitys.html', {'user_activitys': user_activitys,})
 
 @login_required
 def new_perf(request):
