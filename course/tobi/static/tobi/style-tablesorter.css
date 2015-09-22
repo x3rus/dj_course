@@ -19,8 +19,9 @@ table.tablesorter .even {
 table.tablesorter .odd {
 	background-color: #6E6E6E;
 }
-table.tablesorter .header {
-	background-image: url(bg.png);
+
+table.tablesorter th.header { 
+	background-image: url(http://127.0.0.1:8000/static/tobi/images/bg.png);
 	background-repeat: no-repeat;
 	border-left: 1px solid #FFF;
 	border-right: 1px solid #000;

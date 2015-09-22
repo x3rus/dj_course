@@ -1,0 +1,45 @@
+{% extends "tobi/base.html" %}
+
+{% load staticfiles%}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript" src="{% static 'tobi/scripts/list-Activitys.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/style-tablesorter.css' %}" />  
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1> List Activitys </h1>
+
+<!-- http://tablesorter.com/docs/ -->
+
+<div class="listes_activity">
+    <table id="myTable" class="tablesorter"> 
+        <thead> 
+            <tr> 
+                <th>Title</th> 
+                <th>Date Performed</th> 
+                <th>Description</th> 
+                <th>Distance</th> 
+                <th>Activity Status</th> 
+            </tr> 
+        </thead> 
+        <tbody> 
+            {% for activity in user_activitys %}
+            <tr> 
+                <td>{{ activity.title}}</td> 
+                <td>{{ activity.datePerformed }}</td> 
+                <td>{{ activity.description}}</td> 
+                <td>{{ activity.distance}}</td> 
+                <td>{{ activity.activity_status}}</td> 
+            </tr> 
+            {% endfor %}
+        </tbody> 
+    </table> 
+</div>
+
+{% endblock %}
