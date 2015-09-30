@@ -4,9 +4,11 @@
 
 {% block script %}
 <script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.pager.js' %}"></script>
 <script type="text/javascript" src="{% static 'tobi/scripts/list-Activitys.js' %}"></script>
 
 <link rel="stylesheet" type="text/css" href="{% static 'tobi/style-tablesorter.css' %}" />  
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.tablesorter.pager.css' %}" />  
 
 {% endblock %}
 
@@ -17,10 +19,11 @@
 
 <!-- http://tablesorter.com/docs/ -->
 
-<div class="listes_activity">
+<div class="listes_activity" id="lst_activitys">
     <table id="myTable" class="tablesorter"> 
         <thead> 
             <tr> 
+                <th>Op</th> 
                 <th>Title</th> 
                 <th>Date Performed</th> 
                 <th>Description</th> 
@@ -30,7 +33,8 @@
         </thead> 
         <tbody> 
             {% for activity in user_activitys %}
-            <tr> 
+            <tr id={{ activity.pk }} >
+                <td><img src="{% static 'tobi/images/garbage.png' %}"/> </td>
                 <td>{{ activity.title}}</td> 
                 <td>{{ activity.datePerformed }}</td> 
                 <td>{{ activity.description}}</td> 
@@ -40,6 +44,22 @@
             {% endfor %}
         </tbody> 
     </table> 
+    <div id="pager" class="pager">
+        <form>
+            <img src="../addons/pager/icons/first.png" class="first"/>
+            <img src="../addons/pager/icons/prev.png" class="prev"/>
+            <input type="text" class="pagedisplay"/>
+            <img src="../addons/pager/icons/next.png" class="next"/>
+            <img src="../addons/pager/icons/last.png" class="last"/>
+            <select class="pagesize">
+                <option selected="selected"  value="10">10</option>
+                <option value="20">20</option>
+                <!-- <option value="30">30</option>
+                <option  value="40">40</option> -->
+            </select>
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

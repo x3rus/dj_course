@@ -18,5 +18,6 @@ urlpatterns = [
                 url(r'^logout/$', 'django.contrib.auth.views.logout', name="logout"),
                 # Json URL
                 url(r'^json_upload_gpsfile/$', views.json_upload_gpsfile, name='json_upload_gpsfile' ),
+                url(r'^json_del_activity/$', views.json_del_activity, name='json_del_activity' ),
               ]
  

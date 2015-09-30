@@ -786,6 +786,7 @@
                     });
                     // apply easy methods that trigger binded events
                     $this.bind("update", function () {
+                        console.log("update triggered");
                         var me = this;
                         setTimeout(function () {
                             // rebuild parsers.
@@ -859,7 +860,8 @@
                 return /^[-+]?\d*$/.test($.trim(s.replace(/[,.']/g, '')));
             };
             this.clearTableBody = function (table) {
-                if ($.browser.msie) {
+                // if ($.browser.msie) {   http://stackoverflow.com/questions/17273481/jquery-tablesorter-page-addon-does-not-work
+                if (navigator.userAgent.match("MSIE")) {
                     function empty() {
                         while (this.firstChild)
                         this.removeChild(this.firstChild);

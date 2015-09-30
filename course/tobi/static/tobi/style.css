@@ -43,6 +43,9 @@ body, html {
     left: 340px;
 }
 
+.listes_activity {
+/*   overflow: auto;  */
+}
 
 /*#.swipe-area {
     position: absolute;

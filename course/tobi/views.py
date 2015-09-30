@@ -112,6 +112,31 @@ def new_perf(request):
 #################
 
 @login_required
+def json_del_activity(request):
+    if request.method == 'POST':
+
+        activity_id= request.POST.get('del_activity_id')
+        response_data = {}
+        activity_2_del = get_object_or_404(activity, pk=activity_id, owner=request.user )
+        activity_2_del.delete()
+
+        # TODO retourner FALSE erreur si l'id existe Pas
+        response_data['result'] = 'Deleted activity successful!'
+        response_data['success'] = True
+        response_data['activity_2_del'] = activity_id
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        response_data['result'] = 'No ID feed in post !'
+        response_data['success'] = False
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
+@login_required
 def json_upload_gpsfile(request):
     if request.method == 'POST':
         #gpsfile = gpsfile_model(filename= request.FILES('the_gpxfile'))
