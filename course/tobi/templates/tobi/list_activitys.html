@@ -3,12 +3,19 @@
 {% load staticfiles%}
 
 {% block script %}
+<!-- 
+    TODO : a supprimer 
+    ### Premiere configuration avec tablesorter mais ceci est un echec pour la suppression 
+    d'une ligne avec ajax ... je vais donc tester datatables.net qui semble etre une reference
+    selon un collegue ###
 <script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.js' %}"></script>
-<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.pager.js' %}"></script>
+<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.pager.js' %}"></script> 
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/style-tablesorter.css' %}" />  
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.tablesorter.pager.css' %}" />  -->
 <script type="text/javascript" src="{% static 'tobi/scripts/list-Activitys.js' %}"></script>
 
-<link rel="stylesheet" type="text/css" href="{% static 'tobi/style-tablesorter.css' %}" />  
-<link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.tablesorter.pager.css' %}" />  
+<script type="text/javascript" src="{% static 'tobi/scripts/jquery.dataTables.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.dataTables.min.css' %}" />  
 
 {% endblock %}
 
@@ -20,7 +27,7 @@
 <!-- http://tablesorter.com/docs/ -->
 
 <div class="listes_activity" id="lst_activitys">
-    <table id="myTable" class="tablesorter"> 
+    <table id="myTable" class="display" cellspacing="0" width="100%">
         <thead> 
             <tr> 
                 <th>Op</th> 
@@ -44,22 +51,7 @@
             {% endfor %}
         </tbody> 
     </table> 
-    <div id="pager" class="pager">
-        <form>
-            <img src="../addons/pager/icons/first.png" class="first"/>
-            <img src="../addons/pager/icons/prev.png" class="prev"/>
-            <input type="text" class="pagedisplay"/>
-            <img src="../addons/pager/icons/next.png" class="next"/>
-            <img src="../addons/pager/icons/last.png" class="last"/>
-            <select class="pagesize">
-                <option selected="selected"  value="10">10</option>
-                <option value="20">20</option>
-                <!-- <option value="30">30</option>
-                <option  value="40">40</option> -->
-            </select>
-        </form>
-    </div>
 
-</div>
+</div> <!-- class=listes_activity -->
 
 {% endblock %}

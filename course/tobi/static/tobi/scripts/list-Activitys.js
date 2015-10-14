@@ -1,57 +1,9 @@
 
 $(function() {
-    // TODO : Voir pour enlever le sort button de la premiere colomne
-    $("#myTable").tablesorter({widthFixed: true });
-    $('#myTable').tablesorterPager({container: $("#pager")});
-    //$('#myTable').tablesorterPager({container: $("#lst_activitys")});
 
-
-    $( "table" ).on( "click", "img" ,  function() {
-        console.log( "Something in a <table> was clicked, and we detected that it was an <tr> element." );
-        console.log("tr clicked! , id :" + $(this).closest("tr").attr("id"));  // sanity check
-        del_activity( $(this).closest("tr").attr("id")  );
-    });
-
-
-    function del_activity(activity_id) {
-        console.log("delete post " )// sanity check
-            if (confirm('are you sure you want to delete this activity ?')==true){
-                $.ajax({
-                    url : "../json_del_activity/", // the endpoint
-                    type : "POST", // http method
-                    data : { del_activity_id: activity_id }, // data sent with the post ID
-
-                    // handle a successful response
-                    success : function(json) {
-                        console.log(json); // log the returned json to the console
-                        console.log("success delete tr id : " + json.activity_2_del); // another sanity check
-                        $('#'+json.activity_2_del).remove();
-//                        $("#myTable").trigger("update");
-//                        var page_size = 20;
-//                        var curr_page = config.page;
-//                        $("#myTable").tablesorterPager({size: config.totalRows});
- 
-//                        $("#myTable").trigger("update");
-//                        $("#myTable").trigger("appendCache");
-//                        $("#myTable.tablesorter").get(0).config.sortList;
-//                        $("#myTable").trigger("sorton", [config.sortList]);
-//                        $("#myTable").tablesorterPager({size: page_size, page:
-//                         curr_page});
-                    },
-
-                    // handle a non-successful response
-                    error : function(xhr,errmsg,err) {
-                        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                    }
-                });
-            } else {
-                return false
-            }
-
-    } // FIN func del_activity
-
+    $(document).ready(function() {
+            $('#myTable').DataTable();
+    } );
 
 
  
