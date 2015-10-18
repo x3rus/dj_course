@@ -2,11 +2,51 @@
 $(function() {
 
     $(document).ready(function() {
-            $('#myTable').DataTable();
+        var table = $('#myTable').DataTable();
+        // Event click image 
+        $('#myTable tbody').on( 'click', 'img', function () {
+            table
+                .row( $(this).parents('tr') )
+                .remove()
+                .draw();
+
+            console.log( $(this).closest("tr").attr("id")  );
+            console.log( $(this).parents('tr').attr("id") );
+            // TODO avant le refresh valider la suppression
+            del_activity( $(this).closest("tr").attr("id")  );
+        } );
     } );
 
 
- 
+
+function del_activity(activity_id) {
+    console.log("delete post " )// sanity check
+        // TODO mettre 
+        if (confirm('are you sure you want to delete this activity ?')==true){
+            $.ajax({
+                url : "../json_del_activity/", // the endpoint
+                type : "POST", // http method
+                data : { del_activity_id: activity_id }, // data sent with the post ID
+
+                // handle a successful response
+                success : function(json) {
+                    console.log(json); // log the returned json to the console
+                    console.log("success delete tr id : " + json.activity_2_del); // another sanity check
+                },
+
+                // handle a non-successful response
+                error : function(xhr,errmsg,err) {
+                    $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+        } else {
+            return false
+        }
+
+} // FIN func del_activity
+
 // #################################
 // Create cookie for CSRF  token 
 // #################################
@@ -30,8 +70,8 @@ function getCookie(name) {
 var csrftoken = getCookie('csrftoken');
 
 /*
-The functions below will create a header with csrftoken
-*/
+   The functions below will create a header with csrftoken
+   */
 
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
