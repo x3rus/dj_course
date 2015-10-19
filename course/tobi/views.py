@@ -73,6 +73,16 @@ def list_activitys(request):
     user_activitys = activity.objects.filter(owner=request.user)
     return render(request, 'tobi/list_activitys.html', {'user_activitys': user_activitys,})
 
+
+# TODO pour visualiser
+# http://wiki.openstreetmap.org/wiki/Leaflet
+# http://wiki.openstreetmap.org/wiki/Openlayers_Track_example
+# https://github.com/mpetazzoni/leaflet-gpx
+@login_required
+def show_activity(request,activity_id):
+        the_activity  = get_object_or_404(activity, pk=activity_id)
+
+
 @login_required
 def new_perf(request):
     # Handle file upload
@@ -83,6 +93,7 @@ def new_perf(request):
             # TODO ajouter la sauvegarde :D ou la suppression selon le bouton appuye
             if 'save' in request.POST:
                 New_activity = get_object_or_404(activity, id=activity_id)    
+                New_activity.description = form.cleaned_data['description']
                 New_activity.activity_status='FL'
                 New_activity.save()
                 return HttpResponseRedirect('/tobi/')

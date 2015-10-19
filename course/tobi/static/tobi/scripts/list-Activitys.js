@@ -5,24 +5,25 @@ $(function() {
         var table = $('#myTable').DataTable();
         // Event click image 
         $('#myTable tbody').on( 'click', 'img', function () {
-            table
-                .row( $(this).parents('tr') )
-                .remove()
-                .draw();
+            if (confirm('are you sure you want to delete this activity ?')==true){
+                table
+                    .row( $(this).parents('tr') )
+                    .remove()
+                    .draw();
 
-            console.log( $(this).closest("tr").attr("id")  );
-            console.log( $(this).parents('tr').attr("id") );
-            // TODO avant le refresh valider la suppression
-            del_activity( $(this).closest("tr").attr("id")  );
+                console.log( $(this).closest("tr").attr("id")  );
+                console.log( $(this).parents('tr').attr("id") );
+                // TODO avant le refresh valider la suppression
+                del_activity( $(this).closest("tr").attr("id")  );
+            }
         } );
     } );
 
 
 
-function del_activity(activity_id) {
-    console.log("delete post " )// sanity check
-        // TODO mettre 
-        if (confirm('are you sure you want to delete this activity ?')==true){
+    function del_activity(activity_id) {
+        console.log("delete post " )// sanity check
+            // TODO mettre 
             $.ajax({
                 url : "../json_del_activity/", // the endpoint
                 type : "POST", // http method
@@ -32,6 +33,7 @@ function del_activity(activity_id) {
                 success : function(json) {
                     console.log(json); // log the returned json to the console
                     console.log("success delete tr id : " + json.activity_2_del); // another sanity check
+                    return true;
                 },
 
                 // handle a non-successful response
@@ -39,12 +41,9 @@ function del_activity(activity_id) {
                     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
                             " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
                     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    return false;
                 }
             });
-        } else {
-            return false
-        }
-
 } // FIN func del_activity
 
 // #################################

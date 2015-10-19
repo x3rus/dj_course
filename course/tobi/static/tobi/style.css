@@ -117,6 +117,7 @@ body, html {
     border-top-color: #000000;
     border-bottom-color: #000000;
     border-style: solid;
+    overflow: auto;
 }
 .main-content .content{
     box-sizing: border-box;

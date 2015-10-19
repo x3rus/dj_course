@@ -12,12 +12,14 @@ from . import views
 urlpatterns = [
                 url(r'^$', views.IndexView, name='index'),
                 url(r'^new_perf/$', views.new_perf, name='new_perf' ),
+                url(r'^view_activity/(?P<activity_id>[0-9]+)$', views.show_activity, name='show_activity' ),
                 url(r'^view_activity/$', views.list_activitys, name='list_activitys' ),
-                url(r'^new_activity/$', views.new_activity, name='new_activity' ),
                 url(r'^login/$', 'django.contrib.auth.views.login', name="login"),
                 url(r'^logout/$', 'django.contrib.auth.views.logout', name="logout"),
                 # Json URL
                 url(r'^json_upload_gpsfile/$', views.json_upload_gpsfile, name='json_upload_gpsfile' ),
                 url(r'^json_del_activity/$', views.json_del_activity, name='json_del_activity' ),
+                # TODO a supprimer
+                url(r'^new_activity/$', views.new_activity, name='new_activity' ),
               ]
  
