@@ -21,7 +21,12 @@ class UploadActivityForm(forms.Form):
             help_text = 'Title is required'
             )
     datePerformed = forms.DateTimeField(
-            label = 'When the activity was performed'
+            label = 'When the activity was performed',
+            widget = forms.DateTimeInput(attrs = {
+                     'readonly' : "readonly",
+                        }
+                     )
+ 
             )
     description = forms.CharField(
             label = 'Description ',
