@@ -4,7 +4,7 @@ $(function() {
     $(document).ready(function() {
         var table = $('#myTable').DataTable();
         // Event click image 
-        $('#myTable tbody').on( 'click', 'img', function () {
+        $('#myTable tbody').on( 'click', 'img.icon-delete', function () {
             if (confirm('are you sure you want to delete this activity ?')==true){
                 table
                     .row( $(this).parents('tr') )
@@ -16,7 +16,20 @@ $(function() {
                 // TODO avant le refresh valider la suppression
                 del_activity( $(this).closest("tr").attr("id")  );
             }
-        } );
+        } ); // FIN $('#myTable tbody').on( 'click', 'img.icon-delete' ....
+
+        $('#myTable tbody').on( 'click', 'td.title', function () {
+            if (confirm('visualise ceci ')==true){
+
+                console.log( $(this).closest("tr").attr("id")  );
+                console.log( $(this).parents('tr').attr("id") );
+                // TODO avant le refresh valider la suppression
+                del_activity( $(this).closest("tr").attr("id")  );
+            }
+        } ); // FIn $('#myTable tbody').on( 'click', 'td.title'...
+
+
+
     } );
 
 
@@ -44,62 +57,62 @@ $(function() {
                     return false;
                 }
             });
-} // FIN func del_activity
+    } // FIN func del_activity
 
-// #################################
-// Create cookie for CSRF  token 
-// #################################
+    // #################################
+    // Create cookie for CSRF  token 
+    // #################################
 
-// This function gets cookie with a given name
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+    // This function gets cookie with a given name
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
+    var csrftoken = getCookie('csrftoken');
 
-/*
-   The functions below will create a header with csrftoken
-   */
+    /*
+       The functions below will create a header with csrftoken
+       */
 
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-function sameOrigin(url) {
-    // test that a given url is a same-origin URL
-    // url could be relative or scheme relative or absolute
-    var host = document.location.host; // host + port
-    var protocol = document.location.protocol;
-    var sr_origin = '//' + host;
-    var origin = protocol + sr_origin;
-    // Allow absolute or scheme relative URLs to same origin
-    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-        // or any other URL that isn't scheme relative or absolute i.e relative.
-        !(/^(\/\/|http:|https:).*/.test(url));
-}
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    function sameOrigin(url) {
+        // test that a given url is a same-origin URL
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
 
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-            // Send the token to same-origin, relative URLs only.
-            // Send the token only if the method warrants CSRF protection
-            // Using the CSRFToken value acquired earlier
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                // Send the token to same-origin, relative URLs only.
+                // Send the token only if the method warrants CSRF protection
+                // Using the CSRFToken value acquired earlier
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
         }
-    }
-}); // fin $.ajaxSetup
+    }); // fin $.ajaxSetup
 
 
 

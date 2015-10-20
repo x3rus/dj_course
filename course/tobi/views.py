@@ -94,6 +94,9 @@ def new_perf(request):
             if 'save' in request.POST:
                 New_activity = get_object_or_404(activity, id=activity_id)    
                 New_activity.description = form.cleaned_data['description']
+                New_activity.title = form.cleaned_data['title']
+                New_activity.datePerformed = form.cleaned_data['datePerformed']
+                New_activity.ispublic = form.cleaned_data['ispublic']
                 New_activity.activity_status='FL'
                 New_activity.save()
                 return HttpResponseRedirect('/tobi/')

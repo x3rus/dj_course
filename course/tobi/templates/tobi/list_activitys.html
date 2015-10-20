@@ -34,19 +34,19 @@
                 <th>Title</th> 
                 <th>Date Performed</th> 
                 <th>Description</th> 
-                <th>Distance</th> 
-                <th>Activity Status</th> 
+                <th>Distance(km)</th> 
+                <th>Status</th> 
             </tr> 
         </thead> 
         <tbody> 
             {% for activity in user_activitys %}
             <tr id={{ activity.pk }} >
-                <td><img src="{% static 'tobi/images/garbage.png' %}" id="icon-delete" height="25" width="25"/> </td>
-                <td>{{ activity.title}}</td> 
+                <td><img src="{% static 'tobi/images/garbage.png' %}" class="icon-delete" height="25" width="25"/> </td>
+                <td class=title >{{ activity.title }}</td> 
                 <td>{{ activity.datePerformed }}</td> 
-                <td>{{ activity.description}}</td> 
-                <td>{{ activity.distance}}</td> 
-                <td>{{ activity.activity_status}}</td> 
+                <td>{{ activity.description }}</td> 
+                <td>{{ activity.distance|floatformat:2 }}</td> 
+                <td>{{ activity.activity_status }}</td> 
             </tr> 
             {% endfor %}
         </tbody> 
