@@ -38,6 +38,7 @@ import xml.sax
 ##############
 #  My Views  #
 ##############
+@login_required
 def IndexView(request):
     return render(request, 'tobi/index.html')
         

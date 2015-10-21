@@ -67,7 +67,7 @@ function get_file_as_base64_and_upload(id_element) {
             //alert(e.target.result);
             $.base64.utf8encode = true;
             file_data = $.base64.btoa(e.target.result);
-            upload_gpx_datafile(file_data,id_element)
+            upload_gpx_datafile(file_data,id_element);
         };
 
 
