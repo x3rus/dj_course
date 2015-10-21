@@ -1,9 +1,9 @@
-# Mise en place des racoursis de code 
+# Mise en place des racoursis de code
 from django.views import generic
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 
-# Models 
+# Models
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -12,13 +12,13 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-# Module for ajax response 
+# Module for ajax response
 import json
 
 import base64
-import tempfile # use to create temporary file 
+import tempfile # use to create temporary file
 import os # for clean tempfile
-import datetime 
+import datetime
 
 # extract gpx info
 import gpxpy as mod_gpxpy
@@ -26,7 +26,7 @@ import gpxpy as mod_gpxpy
 # Load local modules
 from .models import gpsfile # TODO a term supprimer
 from .models import gpsfile_model, activity
-from .forms import GpxUploadForm # TODO a term supprimer 
+from .forms import GpxUploadForm # TODO a term supprimer
 from .forms import UploadActivityForm
 
 # motionless modules
@@ -41,7 +41,6 @@ import xml.sax
 @login_required
 def IndexView(request):
     return render(request, 'tobi/index.html')
-        
 
 
 @login_required
@@ -93,7 +92,7 @@ def new_perf(request):
             activity_id = form.cleaned_data['activity_id']
             # TODO ajouter la sauvegarde :D ou la suppression selon le bouton appuye
             if 'save' in request.POST:
-                New_activity = get_object_or_404(activity, id=activity_id)    
+                New_activity = get_object_or_404(activity, id=activity_id)
                 New_activity.description = form.cleaned_data['description']
                 New_activity.title = form.cleaned_data['title']
                 New_activity.datePerformed = form.cleaned_data['datePerformed']
@@ -102,7 +101,7 @@ def new_perf(request):
                 New_activity.save()
                 return HttpResponseRedirect('/tobi/')
             elif 'cancel' in request.POST:
-                wrong_activity = get_object_or_404(activity, id=activity_id)    
+                wrong_activity = get_object_or_404(activity, id=activity_id)
                 wrong_activity.delete()
                 return HttpResponseRedirect('/tobi/new_perf')
             else :
@@ -191,7 +190,7 @@ def json_upload_gpsfile(request):
         drafted_activity.distance= gpx_basic_info['length']
         drafted_activity.gpxFile = gpsfile_data_flat
         drafted_activity.owner = request.user
- 
+
         drafted_activity.save()
 
         response_data['activity_id'] = drafted_activity.id
@@ -228,9 +227,9 @@ def extract_gpx_basic_info(gpx_file_name,original_file_name="none"):
         basic_info['name'] = original_file_name.rsplit('.', 1)[0]
     if gpx.description:
         basic_info['description'] = gpx.description
-    if gpx.author:
+    if gpx.author_name:
         basic_info['author'] = gpx.author
-    if gpx.email:
+    if gpx.author_email:
         basic_info['email'] = gpx.email
 
     basic_info['start_time'],basic_info['end_time'] = gpx.get_time_bounds()
@@ -240,7 +239,7 @@ def extract_gpx_basic_info(gpx_file_name,original_file_name="none"):
     moving_time, stopped_time, moving_distance, stopped_distance, max_speed = gpx.get_moving_data()
     basic_info['moving_time'] = moving_time
 
-    # create URL for static image map 
+    # create URL for static image map
     static_map = DecoratedMap(size_x=640,size_y=600,pathweight=8,pathcolor='blue')
     parser = xml.sax.make_parser()
     parser.setContentHandler(GPXHandler(static_map))

@@ -1,0 +1,7 @@
+Django==1.8.5
+GPolyEncode==0.1.1
+argparse==1.2.1
+gpxpy==1.0.0
+motionless==1.2
+simplejson==3.8.0
+wsgiref==0.1.2
