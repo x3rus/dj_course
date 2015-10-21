@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.http import Http404, HttpResponse
 from django.test.client import Client
 import simplejson
+import os 
 
 # View
 from .views import IndexView, new_perf, json_upload_gpsfile
@@ -124,28 +125,12 @@ class TestAuthUser(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "nothing to see")
 
-#    def test_json_upload_activity(self):
-#        """
-#        Upload an activity with the json interface with a gps file 
-#        """
-#         # Create an instance of a GET request.
-#        request = self.factory.get(reverse('tobi:json_upload_gpsfile'))
-#
-#        # Recall that middleware are not supported. You can simulate a
-#        # logged-in user by setting request.user manually.
-#        request.user = self.user
-#
-#        # Request view x3notes/AuserAuth with authenticate user aSecondUser
-#        response = json_upload_gpsfile(request)
-#
-#        # TODO : a supprimer -> info recuperer dans view.py 
-#        #gpsfile = request.POST.get('the_gpxfile')
-#        #gpsfile_data = request.POST.get('the_gpxfile_data')
-#        #gpsfile_data_flat = base64.b64decode(gpsfile_data)
-#
-#
-#        self.assertEqual(response.status_code, 200)
-#        self.assertContains(response, "nothing to see")
+    def test_json_upload_activity(self):
+        """
+        Upload an activity with the json interface with a gps file 
+        """
+        gpx_test_file = open('./tobi/test_medias/course_avec_chien.gpx',"r")
+        print gpx_test_file
 
 
 
