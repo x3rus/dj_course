@@ -155,8 +155,12 @@ def json_upload_gpsfile(request):
     if request.method == 'POST':
         #gpsfile = gpsfile_model(filename= request.FILES('the_gpxfile'))
         #gpsfile = gpsfile_model(filename= request.POST.get('the_gpxfile'))
+
+        # TODO rajouter une validation le systeme crash s'il y a pas de donne json complete
+        # exemple si the_gpxfile_data est a None
+        # print "TOTO2 " + str(request.POST)
         gpsfile = request.POST.get('the_gpxfile')
-        gpsfile_data = request.POST.get('the_gpxfile_data')
+        gpsfile_data = request.POST.get('the_gpfile_data')
         gpsfile_data_flat = base64.b64decode(gpsfile_data)
 
        # TODO ajouter de la validation sur le type de fichier
