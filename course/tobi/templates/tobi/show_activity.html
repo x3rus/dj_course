@@ -8,7 +8,9 @@
 {% leaflet_css %}
 <script type="text/javascript">
 function map_init_basic (map, options) {
-    L.marker([50.5, 30.5]).addTo(map);
+    map.setView([45.571034, -73.898506], 13);
+    L.marker([45.571034, -73.898506]).addTo(map);
+
 
 }
 </script>
