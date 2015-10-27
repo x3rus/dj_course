@@ -80,7 +80,11 @@ def list_activitys(request):
 # https://github.com/mpetazzoni/leaflet-gpx
 @login_required
 def show_activity(request,activity_id):
-        the_activity  = get_object_or_404(activity, pk=activity_id)
+#    the_activity  = get_object_or_404(activity, pk=activity_id).filter(owner=request.user)
+    # TODO ajout de la restriction pour que ce soit uniquement l'utilisateur connecter le proprietaire.
+    the_activity  = get_object_or_404(activity, id=activity_id)
+    return render(request, 'tobi/show_activity.html', {'the_activity': the_activity,})
+
 
 
 @login_required

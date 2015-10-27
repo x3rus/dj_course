@@ -34,6 +34,10 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL="/tobi/"
 LOGIN_URL = "/tobi/login/"
 
+# Configuration for leaflet
+LEAFLET_CONFIG = {
+    'SPATIAL_EXTENT': (5.0, 44.0, 7.5, 46)
+}
 
 # Application definition
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'leaflet',
     'tobi',
 )
 

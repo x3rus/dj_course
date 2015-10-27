@@ -9,7 +9,8 @@ from django.contrib.auth import authenticate, login
 from django.http import Http404, HttpResponse
 from django.test.client import Client
 import simplejson
-import json
+#import json
+#from django.utils import simplejson
 import os 
 import base64
 
@@ -137,16 +138,20 @@ class TestAuthUser(TestCase):
 
         dict_json = {
                     'the_gpxfile' : "course_avec_chien.gpx",
-                    'the_gpxfile_data' : gps_data_b64
+                    'the_gpxfile_data' : "toto",
                 }
 
-        json_to_send = json.dumps(dict_json)
+        json_to_send = simplejson.dumps(dict_json)
 
         c = Client()
         login_sucess = c.login(username=self.user.username,password='top_secret')
         if login_sucess:
-           response = c.post('/tobi/json_upload_gpsfile/', content_type='json', data=json_to_send)
+           response = c.post('/tobi/json_upload_gpsfile/', json_to_send,
+                                  content_type='application/json',
+                                  **{'HTTP_X_REQUESTED_WITH':'XMLHttpRequest'})
+           print " ========== Ze reponse"
            print response
+           print " FIN reponse ============"
 
         self.assertEqual(response.status_code, 200)
 

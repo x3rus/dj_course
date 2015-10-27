@@ -11,14 +11,14 @@ $(function() {
                     .remove()
                     .draw();
 
-                console.log( $(this).closest("tr").attr("id")  );
-                console.log( $(this).parents('tr').attr("id") );
                 // TODO avant le refresh valider la suppression
                 del_activity( $(this).closest("tr").attr("id")  );
             }
         } ); // FIN $('#myTable tbody').on( 'click', 'img.icon-delete' ....
 
-        $('#myTable tbody').on( 'click', 'td.title', function () {
+/* Inutile d'utiliser jquery pour ca car de doute manière je refresh l'ensemble 
+ * de la page !!! je le met donc dans le template !
+ * $('#myTable tbody').on( 'click', 'td.title', function () {
             if (confirm('visualise ceci ')==true){
 
                 console.log( $(this).closest("tr").attr("id")  );
@@ -28,7 +28,7 @@ $(function() {
             }
         } ); // FIn $('#myTable tbody').on( 'click', 'td.title'...
 
-
+*/
 
     } );
 

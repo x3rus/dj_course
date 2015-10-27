@@ -42,7 +42,7 @@
             {% for activity in user_activitys %}
             <tr id={{ activity.pk }} >
                 <td><img src="{% static 'tobi/images/garbage.png' %}" class="icon-delete" height="25" width="25"/> </td>
-                <td class=title >{{ activity.title }}</td> 
+                <td class=title > <a href="/tobi/view_activity/{{ activity.pk }}" >{{ activity.title }}</a></td> 
                 <td>{{ activity.datePerformed }}</td> 
                 <td>{{ activity.description }}</td> 
                 <td>{{ activity.distance|floatformat:2 }}</td> 
