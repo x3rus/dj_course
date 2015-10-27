@@ -94,7 +94,6 @@ def new_perf(request):
         form = UploadActivityForm(request.POST, request.FILES)
         if form.is_valid():
             activity_id = form.cleaned_data['activity_id']
-            # TODO ajouter la sauvegarde :D ou la suppression selon le bouton appuye
             if 'save' in request.POST:
                 New_activity = get_object_or_404(activity, id=activity_id)
                 New_activity.description = form.cleaned_data['description']
@@ -164,7 +163,7 @@ def json_upload_gpsfile(request):
         # exemple si the_gpxfile_data est a None
         # print "TOTO2 " + str(request.POST)
         gpsfile = request.POST.get('the_gpxfile')
-        gpsfile_data = request.POST.get('the_gpfile_data')
+        gpsfile_data = request.POST.get('the_gpxfile_data')
         gpsfile_data_flat = base64.b64decode(gpsfile_data)
 
        # TODO ajouter de la validation sur le type de fichier

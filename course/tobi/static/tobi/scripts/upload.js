@@ -11,26 +11,6 @@ $('#static_map').hide();
 $('#form-info').hide();
 $('#side_info_map').hide();
 
-/* REF : http://stackoverflow.com/questions/253689/switching-a-div-background-image-with-jquery */
-$('#left-arrow').click(function(){
-    console.log("click left arrow");
-    if($('#side_info_map').hasClass('expanded_full_sidebar-info')) {
-        $('#side_info_map').addClass('collapsed_full_sidebar-info').removeClass('expanded_full_sidebar-info');
-    } else {
-        $('#side_info_map').addClass('expanded_full_sidebar-info').removeClass('collapsed_full_sidebar-info');
-    } /* fi expanded*/
-    console.log("click left arrow done");
-});
-
-$('#right-arrow').click(function(){
-    console.log("click right arrow");
-    if($('#side_info_map').hasClass('')) {
-        $('#side_info_map').addClass('expanded_full_sidebar-info').removeClass('collapsed_full_sidebar-info');
-    } else {
-        $('#side_info_map').addClass('collapsed_full_sidebar-info').removeClass('expanded_full_sidebar-info');
-    } /* fi expanded*/
-});
-
 // Submit post on submit
 // TODO vraiment pas sur que c'est bien de faire l'operation ainsi ... 
 //$('#post-activity').on('submit', function(event){
@@ -67,6 +47,8 @@ function get_file_as_base64_and_upload(id_element) {
             //alert(e.target.result);
             $.base64.utf8encode = true;
             file_data = $.base64.btoa(e.target.result);
+            console.log(file_data);
+            console.log(id_element);
             upload_gpx_datafile(file_data,id_element);
         };
 
@@ -174,6 +156,6 @@ $.ajaxSetup({
     }
 });
 
-});
+}); // Fin  $(funcion() {
 
 

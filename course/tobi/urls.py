@@ -20,6 +20,6 @@ urlpatterns = [
                 url(r'^json_upload_gpsfile/$', views.json_upload_gpsfile, name='json_upload_gpsfile' ),
                 url(r'^json_del_activity/$', views.json_del_activity, name='json_del_activity' ),
                 # TODO a supprimer
-                url(r'^new_activity/$', views.new_activity, name='new_activity' ),
+                #url(r'^new_activity/$', views.new_activity, name='new_activity' ),
               ]
  

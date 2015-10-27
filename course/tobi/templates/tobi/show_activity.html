@@ -6,6 +6,10 @@
 {% block script %}
 {% leaflet_js %}
 {% leaflet_css %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/show_activity.css' %}" />
+<script src="{% static 'tobi/scripts/side_info_map.js' %}"></script>
+
 <script type="text/javascript">
 function map_init_basic (map, options) {
     map.setView([45.571034, -73.898506], 13);
@@ -18,12 +22,15 @@ function map_init_basic (map, options) {
 {% endblock %}
 
 {% block content %}
-
-
-<h1> Show Activity </h1>
+        <div class="sidebar-info" id="side_info_map">
+            <img src="{% static 'tobi/images/Plain-Arrows_to-left.png' %}" id="left-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+            <img src="{% static 'tobi/images/Plain-Arrows_to-right.png' %}" id="right-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+            <p id='static_map'> 
+                    {% leaflet_map "test_map" callback="window.map_init_basic" %}
+            </p>
+        </div>
 
 <h2> {{ the_activity.title }} </h2>
 
-{% leaflet_map "test_map" callback="window.map_init_basic" %}
 
 {% endblock %}
