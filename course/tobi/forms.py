@@ -9,8 +9,9 @@ class GpxUploadForm(forms.Form):
             help_text='max. 42 megabytes'
             )
 
+# TODO :  Voir pour merger les 2 formulaire celui d'upload qui a le fichier gpxfile
+#         et le formulaire d'affichage de l'activite
 class UploadActivityForm(forms.Form):
-    # TODO : a analyser : http://stackoverflow.com/questions/15795869/django-modelform-to-have-a-hidden-input
     gpxfile = forms.FileField(
             label='Select your GPX file',
             help_text='(max. 42 megabytes)',
@@ -20,14 +21,15 @@ class UploadActivityForm(forms.Form):
             label = 'Activity title',
             help_text = 'Title is required'
             )
+ 
     datePerformed = forms.DateTimeField(
             label = 'When the activity was performed',
             widget = forms.DateTimeInput(attrs = {
                      'readonly' : "readonly",
                         }
                      )
- 
             )
+
     description = forms.CharField(
             label = 'Description ',
             widget = forms.Textarea(attrs = {
@@ -35,6 +37,7 @@ class UploadActivityForm(forms.Form):
                         }
                      )
             )
+
     distance= forms.FloatField(
             label = 'Distance',
              widget = forms.NumberInput(attrs = {
@@ -42,10 +45,52 @@ class UploadActivityForm(forms.Form):
                         }
                      )
             )
+
     ispublic = forms.BooleanField(
             required=False,
             label = 'Activity is public'
             )
+
+    activity_id = forms.CharField(
+            widget=forms.HiddenInput()
+            )
+
+class ShowActivityForm(forms.Form):
+    title = forms.CharField(
+            max_length=255,
+            label = 'Activity title',
+            help_text = 'Title is required'
+            )
+ 
+    datePerformed = forms.DateTimeField(
+            label = 'When the activity was performed',
+            widget = forms.DateTimeInput(attrs = {
+                     'readonly' : "readonly",
+                        }
+                     )
+            )
+
+    description = forms.CharField(
+            label = 'Description ',
+            widget = forms.Textarea(attrs = {
+                     'onkeyup' : "adjust_textarea(this)",
+                        }
+                     )
+            )
+
+    distance= forms.FloatField(
+            label = 'Distance',
+             widget = forms.NumberInput(attrs = {
+                     'readonly' : "readonly",
+                        }
+                     )
+            )
+
+    ispublic = forms.BooleanField(
+            required=False,
+            label = 'Activity is public'
+            )
+
     activity_id = forms.CharField(
             widget=forms.HiddenInput()
             )
