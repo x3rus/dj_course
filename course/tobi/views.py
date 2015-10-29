@@ -85,33 +85,30 @@ def show_activity(request,activity_id):
     the_activity  = get_object_or_404(activity, id=activity_id)
 
     if request.method == 'POST':
-        form = UploadActivityForm(request.POST, request.FILES)
+        # TODO La logique fonctionne pas !! du au copie / coller de l'activity d'upload
+        form = ShowActivityForm(request.POST, request.FILES)
         if form.is_valid():
-            activity_id = form.cleaned_data['activity_id']
             if 'save' in request.POST:
-                New_activity = get_object_or_404(activity, id=activity_id)
-                New_activity.description = form.cleaned_data['description']
-                New_activity.title = form.cleaned_data['title']
-                New_activity.datePerformed = form.cleaned_data['datePerformed']
-                New_activity.ispublic = form.cleaned_data['ispublic']
-                New_activity.activity_status='FL'
-                New_activity.save()
+                the_activity.description = form.cleaned_data['description']
+                the_activity.title = form.cleaned_data['title']
+                the_activity.ispublic = form.cleaned_data['ispublic']
+                the_activity.activity_status='FL'
+                the_activity.save()
                 return HttpResponseRedirect('/tobi/')
             elif 'delete' in request.POST:
-                wrong_activity = get_object_or_404(activity, id=activity_id)
-                wrong_activity.delete()
+                the_activity.delete()
                 return HttpResponseRedirect('/tobi/')
             else :
-                return HttpResponseRedirect('/tobi/merde_pas_suppose')
+                # Cancel so nothing to do
+                return HttpResponseRedirect('/tobi/')
             # Redirect to the document list after POST
     else:
-        # TODO Clairement pas la bonne methode a analyser !!
         data = {
                 'title': the_activity.title,
                 'description': the_activity.description,
                 'datePerformed': the_activity.datePerformed,
                 'ispublic': the_activity.ispublic,
-                'distance': the_activity.distance,
+                'distance': round(the_activity.distance,2),
                 }
         form = ShowActivityForm(data) # A empty, unbound form
 

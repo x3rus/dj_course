@@ -72,10 +72,9 @@ function adjust_textarea(h) {
                 <label>
                     <span> </span> <input type="submit" id="cancel" value="Cancel" name="cancel"/>
                 </label>
-                {# Include the hidden fields #}
-                {% for hidden in form.hidden_fields %}
-                    {{ hidden }}
-                {% endfor %}
+                <label>
+                    <span> </span> <input type="submit" id="delete" value="Delete" name="delete"/>
+                </label>
             </div>
         </form>
 
