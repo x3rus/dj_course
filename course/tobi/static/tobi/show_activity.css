@@ -1,0 +1,13 @@
+/*
+ * CSS Tobi web site 
+ * Author : Thomas Boutry <thomas.boutry@x3rus.com>
+ * Description :
+ *  Create look for the web site , 
+ */ 
+
+.leaflet-container {  /* all maps */
+    min-height: 600px;
+    min-width: 600px;
+/*    width:  600px;
+    height: 400px; */
+}
