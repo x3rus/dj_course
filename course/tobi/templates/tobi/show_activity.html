@@ -10,12 +10,17 @@
 <!-- TODO : modifier la taille de la map par default comme quand on ajouter une activity -->
 <link rel="stylesheet" type="text/css" href="{% static 'tobi/show_activity.css' %}" />
 <script src="{% static 'tobi/scripts/side_info_map.js' %}"></script>
+<script src="{% static 'tobi/leaflet-gpx/gpx.js' %}"></script>
 
 <script type="text/javascript">
 function map_init_basic (map, options) {
-    map.setView([45.571034, -73.898506], 13);
-    L.marker([45.571034, -73.898506]).addTo(map);
+//    map.setView([45.571034, -73.898506], 13);
+//    L.marker([45.571034, -73.898506]).addTo(map);
 
+    var gpx = "./{{ the_activity.id }}/gpx"
+    new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+          map.fitBounds(e.target.getBounds());
+    }).addTo(map);
 
 }
 </script>

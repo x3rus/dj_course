@@ -13,6 +13,7 @@ urlpatterns = [
                 url(r'^$', views.IndexView, name='index'),
                 url(r'^new_perf/$', views.new_perf, name='new_perf' ),
                 url(r'^view_activity/(?P<activity_id>[0-9]+)$', views.show_activity, name='show_activity' ),
+                url(r'^view_activity/(?P<activity_id>[0-9]+)/gpx/?$', views.show_gpx_activity, name='show_gpx_activity' ),
                 url(r'^view_activity/$', views.list_activitys, name='list_activitys' ),
                 url(r'^login/$', 'django.contrib.auth.views.login', name="login"),
                 url(r'^logout/$', 'django.contrib.auth.views.logout', name="logout"),

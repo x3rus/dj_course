@@ -73,11 +73,15 @@ def list_activitys(request):
     user_activitys = activity.objects.filter(owner=request.user)
     return render(request, 'tobi/list_activitys.html', {'user_activitys': user_activitys,})
 
+@login_required
+def show_gpx_activity(request,activity_id):
+    # TODO ajout de la restriction pour que ce soit uniquement l'utilisateur connecter le proprietaire.
+    the_activity= get_object_or_404(activity, id=activity_id)
+    # La variable gpxFile|safe est utiliser pour qu'il n'y est pas d'interpretation
+    return render(request, 'tobi/show_gpx_activity.html', {'gpxFile':the_activity.gpxFile,})
 
-# TODO pour visualiser
-# http://wiki.openstreetmap.org/wiki/Leaflet
-# http://wiki.openstreetmap.org/wiki/Openlayers_Track_example
-# https://github.com/mpetazzoni/leaflet-gpx
+ 
+
 @login_required
 def show_activity(request,activity_id):
 #    the_activity  = get_object_or_404(activity, pk=activity_id).filter(owner=request.user)
