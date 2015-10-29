@@ -19,7 +19,17 @@ function map_init_basic (map, options) {
 
 }
 </script>
-
+<script>
+// Quand je met la definition dans main.js il ne trouve pas la function :-/
+//auto expand textarea
+function adjust_textarea(h) {
+    // Increase de size for max 100px
+    if (h.scrollHeight < 100 ) {
+        h.style.height = "20px";
+        h.style.height = (h.scrollHeight)+"px";
+    }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -33,5 +43,40 @@ function map_init_basic (map, options) {
 
 <h2> {{ the_activity.title }} </h2>
 
+        <form class="form_tobi" action="{% url 'tobi:show_activity' the_activity.id %}" method="post" enctype="multipart/form-data" id="post-activity">
+            {% csrf_token %}
+            <p> 
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+            </p>
+            
+            <div id="form-info" >
+                <label>
+                    <span> {{form.title.label}} </span> {{form.title }}
+                </label>
+                <label>
+                    <span> {{form.datePerformed.label}} </span> {{form.datePerformed}}
+                </label>
+                <label>
+                    <span> {{form.description.label}} </span> {{form.description}}
+                </label>
+                <label>
+                    <span> {{form.distance.label}} </span> {{form.distance}}
+                </label>
+                <label>
+                    <span> {{form.ispublic.label}} </span> {{form.ispublic}}
+                </label>
+                <label>
+                    <span> </span> <input type="submit" id="save" value="Save" name="save" /> 
+                </label>
+                <label>
+                    <span> </span> <input type="submit" id="cancel" value="Cancel" name="cancel"/>
+                </label>
+                {# Include the hidden fields #}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+            </div>
+        </form>
 
 {% endblock %}

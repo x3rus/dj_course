@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
+# Model applicatif 
+# TODO peut-etre a supprimer ceci est present pour test de forms les 2 from en commentaire
+#from .models import activity
+#from django.forms import ModelForm
+
 # TODO : Faut mettre plus de viande mieux comprendre ce formulaire.
 #        gros merci a https://github.com/axelpale/minimal-django-file-upload-example
 class GpxUploadForm(forms.Form):
@@ -9,7 +14,7 @@ class GpxUploadForm(forms.Form):
             help_text='max. 42 megabytes'
             )
 
-# TODO :  Voir pour merger les 2 formulaire celui d'upload qui a le fichier gpxfile
+    # TODO :  Voir pour merger les 2 formulaire celui d'upload qui a le fichier gpxfile
 #         et le formulaire d'affichage de l'activite
 class UploadActivityForm(forms.Form):
     gpxfile = forms.FileField(
@@ -21,29 +26,29 @@ class UploadActivityForm(forms.Form):
             label = 'Activity title',
             help_text = 'Title is required'
             )
- 
+
     datePerformed = forms.DateTimeField(
             label = 'When the activity was performed',
             widget = forms.DateTimeInput(attrs = {
-                     'readonly' : "readonly",
-                        }
-                     )
+                'readonly' : "readonly",
+                }
+                )
             )
 
     description = forms.CharField(
             label = 'Description ',
             widget = forms.Textarea(attrs = {
-                     'onkeyup' : "adjust_textarea(this)",
-                        }
-                     )
+                'onkeyup' : "adjust_textarea(this)",
+                }
+                )
             )
 
     distance= forms.FloatField(
             label = 'Distance',
-             widget = forms.NumberInput(attrs = {
-                     'readonly' : "readonly",
-                        }
-                     )
+            widget = forms.NumberInput(attrs = {
+                'readonly' : "readonly",
+                }
+                )
             )
 
     ispublic = forms.BooleanField(
@@ -61,29 +66,29 @@ class ShowActivityForm(forms.Form):
             label = 'Activity title',
             help_text = 'Title is required'
             )
- 
+
     datePerformed = forms.DateTimeField(
             label = 'When the activity was performed',
             widget = forms.DateTimeInput(attrs = {
-                     'readonly' : "readonly",
-                        }
-                     )
+                'readonly' : "readonly",
+                }
+                )
             )
 
     description = forms.CharField(
             label = 'Description ',
             widget = forms.Textarea(attrs = {
-                     'onkeyup' : "adjust_textarea(this)",
-                        }
-                     )
+                'onkeyup' : "adjust_textarea(this)",
+                }
+                )
             )
 
     distance= forms.FloatField(
             label = 'Distance',
-             widget = forms.NumberInput(attrs = {
-                     'readonly' : "readonly",
-                        }
-                     )
+            widget = forms.NumberInput(attrs = {
+                'readonly' : "readonly",
+                }
+                )
             )
 
     ispublic = forms.BooleanField(
@@ -91,7 +96,4 @@ class ShowActivityForm(forms.Form):
             label = 'Activity is public'
             )
 
-    activity_id = forms.CharField(
-            widget=forms.HiddenInput()
-            )
 

@@ -27,7 +27,7 @@ import gpxpy as mod_gpxpy
 from .models import gpsfile # TODO a term supprimer
 from .models import gpsfile_model, activity
 from .forms import GpxUploadForm # TODO a term supprimer
-from .forms import UploadActivityForm
+from .forms import UploadActivityForm, ShowActivityForm
 
 # motionless modules
 from motionless import AddressMarker, LatLonMarker,DecoratedMap, CenterMap, VisibleMap
@@ -83,7 +83,49 @@ def show_activity(request,activity_id):
 #    the_activity  = get_object_or_404(activity, pk=activity_id).filter(owner=request.user)
     # TODO ajout de la restriction pour que ce soit uniquement l'utilisateur connecter le proprietaire.
     the_activity  = get_object_or_404(activity, id=activity_id)
-    return render(request, 'tobi/show_activity.html', {'the_activity': the_activity,})
+
+    if request.method == 'POST':
+        form = UploadActivityForm(request.POST, request.FILES)
+        if form.is_valid():
+            activity_id = form.cleaned_data['activity_id']
+            if 'save' in request.POST:
+                New_activity = get_object_or_404(activity, id=activity_id)
+                New_activity.description = form.cleaned_data['description']
+                New_activity.title = form.cleaned_data['title']
+                New_activity.datePerformed = form.cleaned_data['datePerformed']
+                New_activity.ispublic = form.cleaned_data['ispublic']
+                New_activity.activity_status='FL'
+                New_activity.save()
+                return HttpResponseRedirect('/tobi/')
+            elif 'delete' in request.POST:
+                wrong_activity = get_object_or_404(activity, id=activity_id)
+                wrong_activity.delete()
+                return HttpResponseRedirect('/tobi/')
+            else :
+                return HttpResponseRedirect('/tobi/merde_pas_suppose')
+            # Redirect to the document list after POST
+    else:
+        # TODO Clairement pas la bonne methode a analyser !!
+        data = {
+                'title': the_activity.title,
+                'description': the_activity.description,
+                'datePerformed': the_activity.datePerformed,
+                'ispublic': the_activity.ispublic,
+                'distance': the_activity.distance,
+                }
+        form = ShowActivityForm(data) # A empty, unbound form
+
+
+    # Render list page with the documents and the form
+    return render_to_response(
+           'tobi/show_activity.html',
+                {'form': form,
+                 'the_activity': the_activity,},
+                context_instance=RequestContext(request)
+            )
+
+
+#    return render(request, 'tobi/show_activity.html', {'the_activity': the_activity,})
 
 
 
