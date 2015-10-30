@@ -18,10 +18,23 @@ function map_init_basic (map, options) {
 //    L.marker([45.571034, -73.898506]).addTo(map);
 
     var gpx = "./{{ the_activity.id }}/gpx"
-    new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+        new L.GPX(gpx, {
+                async: true, 
+                }).on('loaded', function(e) {
           map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
+/*
+   Test passant avec un deuxieme fichier gpx sur la map
+       var gpx = "./52/gpx"
+        new L.GPX(gpx, {
+                async: true, 
+                polyline_options: {
+                    color: 'red'}
+                }).on('loaded', function(e) {
+          map.fitBounds(e.target.getBounds());
+    }).addTo(map);
+*/
 }
 </script>
 <script>
