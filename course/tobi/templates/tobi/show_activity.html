@@ -9,32 +9,37 @@
 
 <!-- TODO : modifier la taille de la map par default comme quand on ajouter une activity -->
 <link rel="stylesheet" type="text/css" href="{% static 'tobi/show_activity.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/my_bootstrap.css' %}" />
 <script src="{% static 'tobi/scripts/side_info_map.js' %}"></script>
 <script src="{% static 'tobi/leaflet-gpx/gpx.js' %}"></script>
+<script src="{% static 'tobi/scripts/my_bootstrap.js' %}"></script>
 
 <script type="text/javascript">
 function map_init_basic (map, options) {
-//    map.setView([45.571034, -73.898506], 13);
-//    L.marker([45.571034, -73.898506]).addTo(map);
+    //  test de creation d'une map avec zoom sur cette dernierer
+    //    map.setView([45.571034, -73.898506], 13);
+    //    L.marker([45.571034, -73.898506]).addTo(map);
+    function _c(c) { return elt.getElementsByClassName(c)[0]; }
 
     var gpx = "./{{ the_activity.id }}/gpx"
         new L.GPX(gpx, {
-                async: true, 
-                }).on('loaded', function(e) {
-          map.fitBounds(e.target.getBounds());
-    }).addTo(map);
+            async: true, 
+        }).on('loaded', function(e) {
+            map.fitBounds(e.target.getBounds());
+            _c('distance').textContent = gpx.get_distance_imp().toFixed(2);
+        }).addTo(map);
 
-/*
-   Test passant avec un deuxieme fichier gpx sur la map
+    /*
+       Test passant avec un deuxieme fichier gpx sur la map
        var gpx = "./52/gpx"
-        new L.GPX(gpx, {
-                async: true, 
-                polyline_options: {
-                    color: 'red'}
-                }).on('loaded', function(e) {
-          map.fitBounds(e.target.getBounds());
-    }).addTo(map);
-*/
+       new L.GPX(gpx, {
+       async: true, 
+       polyline_options: {
+       color: 'red'}
+       }).on('loaded', function(e) {
+       map.fitBounds(e.target.getBounds());
+       }).addTo(map);
+     */
 }
 </script>
 <script>
@@ -51,43 +56,67 @@ function adjust_textarea(h) {
 {% endblock %}
 
 {% block content %}
-        <div class="sidebar-info" id="side_info_map">
-            <img src="{% static 'tobi/images/Plain-Arrows_to-left.png' %}" id="left-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
-            <img src="{% static 'tobi/images/Plain-Arrows_to-right.png' %}" id="right-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
-            <p id='static_map'> 
-                    {% leaflet_map "test_map" callback="window.map_init_basic" %}
-            </p>
+<div class="sidebar-info" id="side_info_map">
+    <img src="{% static 'tobi/images/Plain-Arrows_to-left.png' %}" id="left-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+    <img src="{% static 'tobi/images/Plain-Arrows_to-right.png' %}" id="right-arrow" alt="Fleche" style="float;width:22px;height:18px;" >
+    <p id='static_map'> 
+    {% leaflet_map "test_map" callback="window.map_init_basic" %}
+    </p>
+</div>
+
+    <h1> {{ the_activity.title }} </h1>
+
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#Base">Info</a></li>
+        <li><a data-toggle="pill" href="#Detail_course">Detail</a></li>
+        <li><a data-toggle="pill" href="#Graph">Graphique</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="Base" class="tab-pane fade in active">
+            <h3>Activity information</h3>
+
+            <form class="form_tobi" action="{% url 'tobi:show_activity' the_activity.id %}" method="post" enctype="multipart/form-data" id="post-activity">
+                {% csrf_token %}
+                <p> 
+                {{ form.errors }}
+                {{ form.non_field_errors }}
+                </p>
+
+                <div id="form-info" >
+                    <label>
+                        <span> {{form.title.label}} </span> {{form.title }}
+                    </label>
+                    <label>
+                        <span> {{form.datePerformed.label}} </span> {{form.datePerformed}}
+                    </label>
+                    <label>
+                        <span> {{form.description.label}} </span> {{form.description}}
+                    </label>
+                    <label>
+                        <span> {{form.distance.label}} </span> {{form.distance}}
+                    </label>
+                    <label>
+                        <span> {{form.ispublic.label}} </span> {{form.ispublic}}
+                    </label>
+                    <input type="submit" id="save" value="Save" name="save" />
+                    <input type="submit" id="cancel" value="Cancel" name="cancel"/>
+                    <input type="submit" id="delete" value="Delete" name="delete"/>
+                </div>
+            </form>
+
         </div>
-
-<h2> {{ the_activity.title }} </h2>
-
-        <form class="form_tobi" action="{% url 'tobi:show_activity' the_activity.id %}" method="post" enctype="multipart/form-data" id="post-activity">
-            {% csrf_token %}
-            <p> 
-            {{ form.errors }}
-            {{ form.non_field_errors }}
-            </p>
-            
-            <div id="form-info" >
-                <label>
-                    <span> {{form.title.label}} </span> {{form.title }}
-                </label>
-                <label>
-                    <span> {{form.datePerformed.label}} </span> {{form.datePerformed}}
-                </label>
-                <label>
-                    <span> {{form.description.label}} </span> {{form.description}}
-                </label>
-                <label>
-                    <span> {{form.distance.label}} </span> {{form.distance}}
-                </label>
-                <label>
-                    <span> {{form.ispublic.label}} </span> {{form.ispublic}}
-                </label>
-                <input type="submit" id="save" value="Save" name="save" />
-                <input type="submit" id="cancel" value="Cancel" name="cancel"/>
-                <input type="submit" id="delete" value="Delete" name="delete"/>
-            </div>
-        </form>
-
-{% endblock %}
+        <div id="Detail_course" class="tab-pane fade">
+            <h3>Activity Information </h3>
+            <li>Distance:&nbsp;<span class="distance"></span>&nbsp;mi</li>
+            <p>Like elevation , </p>
+            <p>Like distance, </p>
+            <p>Like duree , </p>
+            <p>Like blabla, </p>
+        </div>
+        <div id="Graph" class="tab-pane fade">
+            <h3>Graphique</h3>
+            <p>Le super graphique de ouff</p>
+        </div>
+    </div>
+    {% endblock %}
