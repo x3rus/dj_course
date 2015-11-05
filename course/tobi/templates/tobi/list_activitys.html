@@ -3,16 +3,8 @@
 {% load staticfiles%}
 
 {% block script %}
-<!-- 
-    TODO : a supprimer 
-    ### Premiere configuration avec tablesorter mais ceci est un echec pour la suppression 
-    d'une ligne avec ajax ... je vais donc tester datatables.net qui semble etre une reference
-    selon un collegue ###
-<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.js' %}"></script>
-<script type="text/javascript" src="{% static 'tobi/scripts/jquery.tablesorter.pager.js' %}"></script> 
-<link rel="stylesheet" type="text/css" href="{% static 'tobi/style-tablesorter.css' %}" />  
-<link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.tablesorter.pager.css' %}" />  -->
 <script type="text/javascript" src="{% static 'tobi/scripts/list-Activitys.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'tobi/list-Activitys.css' %}" />  
 
 <script type="text/javascript" src="{% static 'tobi/scripts/jquery.dataTables.min.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'tobi/jquery.dataTables.min.css' %}" />  

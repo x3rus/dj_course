@@ -19,14 +19,24 @@ function map_init_basic (map, options) {
     //  test de creation d'une map avec zoom sur cette dernierer
     //    map.setView([45.571034, -73.898506], 13);
     //    L.marker([45.571034, -73.898506]).addTo(map);
+    elt = document.getElementById('Detail_course');
     function _c(c) { return elt.getElementsByClassName(c)[0]; }
 
     var gpx = "./{{ the_activity.id }}/gpx"
         new L.GPX(gpx, {
             async: true, 
         }).on('loaded', function(e) {
+            var gpx = e.target;
             map.fitBounds(e.target.getBounds());
-            _c('distance').textContent = gpx.get_distance_imp().toFixed(2);
+            _c('distance_mile').textContent = gpx.get_distance_imp().toFixed(2);
+            _c('distance').textContent = (gpx.get_distance() / 1000).toFixed(2);
+            _c('moving_time').textContent = gpx.get_duration_string(gpx.get_moving_time());
+            _c('total_time').textContent     = gpx.get_duration_string(gpx.get_total_time() );
+            _c('avgspeed').textContent    = gpx.get_moving_speed().toFixed(2);
+            _c('elevation-gain').textContent = gpx.to_ft(gpx.get_elevation_gain()).toFixed(0);
+            _c('elevation-loss').textContent = gpx.to_ft(gpx.get_elevation_loss()).toFixed(0);
+            _c('elevation-net').textContent  = gpx.to_ft(gpx.get_elevation_gain()
+                    - gpx.get_elevation_loss()).toFixed(0);
         }).addTo(map);
 
     /*
@@ -69,7 +79,7 @@ function adjust_textarea(h) {
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#Base">Info</a></li>
         <li><a data-toggle="pill" href="#Detail_course">Detail</a></li>
-        <li><a data-toggle="pill" href="#Graph">Graphique</a></li>
+        <!-- <li><a data-toggle="pill" href="#Graph">Graphique</a></li> -->
     </ul>
 
     <div class="tab-content">
@@ -108,15 +118,19 @@ function adjust_textarea(h) {
         </div>
         <div id="Detail_course" class="tab-pane fade">
             <h3>Activity Information </h3>
-            <li>Distance:&nbsp;<span class="distance"></span>&nbsp;mi</li>
-            <p>Like elevation , </p>
-            <p>Like distance, </p>
-            <p>Like duree , </p>
-            <p>Like blabla, </p>
+                <li>distance:&nbsp;<span class="distance"></span> km</li>
+                <li>distance Miles:&nbsp;<span class="distance_mile"></span> ml</li>
+                <li>duration (moving):&nbsp;<span class="moving_time"></span></li>
+                <li>duration (total Time):&nbsp;<span class="total_time"></span></li>
+                <li>speed average:&nbsp;<span class="avgspeed"></span> km/h</li>
+                <li>elevation-gain:&nbsp;<span class="elevation-gain"></span></li>
+                <li>elevation-loss:&nbsp;<span class="elevation-loss"></span></li>
+                <li>elevation-net:&nbsp;<span class="elevation-net"></span></li>
         </div>
-        <div id="Graph" class="tab-pane fade">
+<!--        <div id="Graph" class="tab-pane fade">
             <h3>Graphique</h3>
             <p>Le super graphique de ouff</p>
         </div>
+-->
     </div>
     {% endblock %}
